@@ -1,11 +1,12 @@
 <%-- Created by IntelliJ IDEA. --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
+<head>
     <title></title>
-  </head>
-  <body>
-  <jsp:forward page="login.html" />
+</head>
+<body>
+index
+<jsp:forward page="login.jsp"/>
 
-  </body>
+</body>
 </html>
