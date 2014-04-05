@@ -27,7 +27,7 @@ public class DatabaseConnection {
             connection = DriverManager.getConnection(server, user, password);
         } catch (Exception e) {
             System.out.println("Connection failed");
-            JOptionPane.showInternalMessageDialog(null, "Connection failed");
+            JOptionPane.showMessageDialog(null,"Connection failed");
             e.printStackTrace();
         }
     }

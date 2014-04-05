@@ -1,9 +1,9 @@
 package hibernate;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Session;
+import org.hibernate.Query;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.service.ServiceRegistry;
@@ -14,9 +14,9 @@ import java.util.Map;
 /**
  * Created with IntelliJ IDEA.
  * Author: Tomás Vilaboa
- * Project: Trav
- * Date: 26/03/14
- * Time: 09:44
+ * Project: TravelTogether
+ * Date: 02/04/2014
+ * Time: 09:00 PM
  */
 public class Main {
     private static final SessionFactory ourSessionFactory;

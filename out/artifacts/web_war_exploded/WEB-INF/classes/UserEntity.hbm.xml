@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="hibernate.UsersEntity" table="USERS" schema="PUBLIC" catalog="PUBLIC">
+        <id name="id">
+            <column name="ID" sql-type="integer" not-null="true" unique="true"/>
+            <generator class="identity" />
+        </id>
+        <property name="user">
+            <column name="USER" sql-type="varchar" length="45"/>
+        </property>
+        <property name="pass">
+            <column name="PASS" sql-type="varchar" length="45"/>
+        </property>
+        <property name="email">
+            <column name="EMAIL" sql-type="varchar" length="45"/>
+        </property>
+    </class>
+</hibernate-mapping>
