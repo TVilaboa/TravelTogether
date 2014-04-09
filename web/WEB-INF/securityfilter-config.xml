@@ -9,7 +9,7 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Secure Page</web-resource-name>
-            <url-pattern>/secure*</url-pattern>
+            <url-pattern>/Secure/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>inthisrole</role-name>
@@ -26,8 +26,8 @@
         </form-login-config>
     </login-config>
 
-    <realm className="org.securityfilter.example.realm.TrivialSecurityRealm">
-        <realm-param name="exampleProperty" value="it works!"/>
+    <realm className="model.user.LoginRealm">
+    <realm-param name="exampleProperty" value="it works!"/>
     </realm>
 
 </securityfilter-config>

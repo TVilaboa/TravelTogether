@@ -1,7 +1,5 @@
 package hibernate;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 /**
@@ -21,9 +19,23 @@ public class UsersEntity {
     private String pass;
     private String email;
 
+    public UsersEntity(String user, String pass) {
+        this.user = user;
+        this.pass = pass;
+    }
+
+    public UsersEntity() {
+    }
+
+    public UsersEntity(String user, String pass, String email) {
+        this.user = user;
+        this.pass = pass;
+        this.email = email;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false, insertable = true, updatable = true,unique = true)
+    @Column(name = "ID", nullable = false, insertable = true, updatable = true, unique = true)
     public int getId() {
         return id;
     }
