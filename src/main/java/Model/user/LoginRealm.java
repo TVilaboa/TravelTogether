@@ -2,11 +2,11 @@ package model.user;
 
 import hibernate.Main;
 import hibernate.UsersEntity;
-import model.Constants;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.securityfilter.realm.SimpleSecurityRealmBase;
 
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -31,6 +31,7 @@ public class LoginRealm extends SimpleSecurityRealmBase {
 
     private String exampleProperty;
 
+
     /**
      * Authenticate a user.
      * <p/>
@@ -40,25 +41,25 @@ public class LoginRealm extends SimpleSecurityRealmBase {
      * @param password a plain text password, as entered by the user
      * @return null if the user cannot be authenticated, otherwise a Principal object is returned
      */
+
     public boolean booleanAuthenticate(String username, String password) {
-//        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-//        StandardServiceRegistryBuilder sb = new StandardServiceRegistryBuilder();
-//        sb.applySettings(cfg.getProperties());
-//        StandardServiceRegistry standardServiceRegistry = sb.build();
-//        SessionFactory sessionFactory = cfg.buildSessionFactory(standardServiceRegistry);
-//
-//
-//        Query query = sessionFactory.getCurrentSession();
-        //resovler tema del email
+
         Session session = Main.getSession();
-        String hql = "FROM UsersEntity U WHERE U.user = " + username;
+        String hql = "FROM UsersEntity U WHERE U.user = :username";
         Query query = session.createQuery(hql);
+        query.setParameter("username", username);
         List results = query.list();
-        if (results.isEmpty())
+        if (results.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "user doesnt exist");
             return false;
+        }
         UsersEntity dbuser = (UsersEntity) results.get(0);
-        if (dbuser.getPass().equals(password))
+        if (dbuser.getPass().equals(password)) {
+            JOptionPane.showMessageDialog(null, "login ok");
+
             return true;
+        }
+        JOptionPane.showMessageDialog(null, "login failed");
         return false;
 
     }
@@ -73,10 +74,7 @@ public class LoginRealm extends SimpleSecurityRealmBase {
      * @return true if the user is in the role, false otherwise
      */
     public boolean isUserInRole(String username, String role) {
-        return (
-                (Constants.VALID_USERNAME.equals(username) || Constants.VALID_USERNAME2.equals(username))
-                        && Constants.VALID_ROLE.equals(role)
-        );
+        return true;
     }
 
     /**
