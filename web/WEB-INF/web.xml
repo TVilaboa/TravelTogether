@@ -52,16 +52,7 @@
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <description></description>
-        <display-name>ViewRecords</display-name>
-        <servlet-name>ViewRecords</servlet-name>
-        <servlet-class>servlets.ViewRecords</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ViewRecords</servlet-name>
-        <url-pattern>/ViewRecords</url-pattern>
-    </servlet-mapping>
+
 
     <listener>
                   <listener-class>
