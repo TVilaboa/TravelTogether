@@ -10,6 +10,8 @@
         <property name="connection.password"></property>
         <mapping class="hibernate.UsersEntity"/>
         <mapping resource="UserEntity.hbm.xml"/>
+        <mapping class="hibernate.EventsEntity"/>
+        <mapping resource="EventEntity.hmb.xml"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>
