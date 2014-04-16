@@ -1,6 +1,7 @@
 package servlets;
 
-import model.user.LoginRealm;
+
+import security.LoginRealm;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

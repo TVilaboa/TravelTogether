@@ -27,8 +27,8 @@
         </form-login-config>
     </login-config>
 
-    <realm className="model.user.LoginRealm">
-    <realm-param name="exampleProperty" value="it works!"/>
+    <realm className="security.LoginRealm">
+        <realm-param name="exampleProperty" value="it works!"/>
     </realm>
 
 </securityfilter-config>

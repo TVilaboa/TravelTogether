@@ -1,4 +1,4 @@
-package model.user;
+package security;
 
 import hibernate.Main;
 import hibernate.UsersEntity;
@@ -21,8 +21,8 @@ public class LoginRealm extends SimpleSecurityRealmBase {
     /**
      * Trivial implementation of the SecurityRealmInterface.
      * <p/>
-     * There is one user: username is 'username', password is 'password'
-     * And this user is in one role: 'inthisrole'
+     * There is one model: username is 'username', password is 'password'
+     * And this model is in one role: 'inthisrole'
      *
      * @author Max Cooper (max@maxcooper.com)
      * @version $Revision: 1.3 $ $Date: 2003/10/25 10:49:04 $

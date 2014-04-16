@@ -1,4 +1,4 @@
-<%@ page import="model.Constants" %>
+<%@ page import="security.Constants" %>
 <%--
   Created by IntelliJ IDEA.
   User: root
@@ -37,14 +37,14 @@ You dont have an user? Register!!!
         <tr>
             <td>User</td>
             <td><input type="text"
-                       name="<%=Constants.LOGIN_USERNAME_FIELD%>"
+                       name="<%=Constants.REGISTER_USERNAME_FIELD%>"
                        value="<%=Constants.VALID_USERNAME%>"
                     ></td>
         </tr>
         <tr>
             <td>Password</td>
             <td><input type="password"
-                       name="<%=Constants.LOGIN_PASSWORD_FIELD%>"
+                       name="<%=Constants.REGISTER_PASSWORD_FIELD%>"
                        value="<%=Constants.VALID_PASSWORD%>"
                     ></td>
         </tr>

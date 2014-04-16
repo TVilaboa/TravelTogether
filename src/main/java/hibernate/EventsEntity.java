@@ -19,6 +19,7 @@ public class EventsEntity {
     private Integer start;
     private Integer end;
 
+
     @Id
     @Column(name = "ID", nullable = false, insertable = true, updatable = true)
     public int getId() {

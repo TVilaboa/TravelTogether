@@ -3,10 +3,10 @@ package servlets;
 
 import hibernate.Main;
 import hibernate.UsersEntity;
-import model.Constants;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import security.Constants;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +30,6 @@ public class Register extends HttpServlet {
     Connection con;
 
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -40,7 +39,7 @@ public class Register extends HttpServlet {
             e.printStackTrace(System.out);
         }
         try {
-            con= DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/xdb", "SA", "");
+            con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/xdb", "SA", "");
 
         } catch (SQLException e) {
             e.printStackTrace(System.out);
@@ -51,26 +50,26 @@ public class Register extends HttpServlet {
         if (email.equals("") || user.equals("") || pass.equals(""))
             JOptionPane.showMessageDialog(null, "Datos ingresados incorrectamente");
         else
-        register(user, pass, email,resp);
+            register(user, pass, email, resp);
         resp.sendRedirect("login.jsp");
     }
 
-    private void register(String user, String pass, String email,HttpServletResponse resp) throws IOException {
+    private void register(String user, String pass, String email, HttpServletResponse resp) throws IOException {
         Session session = Main.getSession();
         Transaction tx = null;
-        try{
+        try {
             tx = session.beginTransaction();
-           UsersEntity userE=new UsersEntity();
+            UsersEntity userE = new UsersEntity();
             userE.setUser(user);
             userE.setEmail(email);
             userE.setPass(pass);
             session.save(userE);
             tx.commit();
             JOptionPane.showMessageDialog(null, "Succesfully registered");
-        }catch (HibernateException e) {
-            if (tx!=null) tx.rollback();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
-        }finally {
+        } finally {
             session.close();
         }
 
