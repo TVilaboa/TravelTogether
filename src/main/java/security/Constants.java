@@ -17,5 +17,7 @@ public interface Constants {
     public static final String REGISTER_PASSWORD_FIELD = "r_password";
     public static final String LOG_IN = "Log In";
     public static final String REGISTER = "Sign In";
+    public static final String HOME_FORM_ID = "homeForm";
+    public static final String HOME_POST_FIELD = "postMe";
 }
 

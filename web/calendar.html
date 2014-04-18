@@ -1,38 +1,9 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--<title>Minimum Setup</title>-->
-<!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
-<!--<link rel="stylesheet" href="css/calendar.css">-->
-<!--</head>-->
-<!--<body>-->
-<!--asd-->
-<!--<div id="calendar"></div>-->
-
-<!--<script type="text/javascript" src="js/vendor/jquery-2.1.0.js"></script>-->
-<!--<script type="text/javascript" src="js/vendor/underscore.js"></script>-->
-<!--<script type="text/javascript" src="js/calendar.js"></script>-->
-<!--<script type="text/javascript">-->
-<!--var calendar = $('#calendar').calendar({ events_source: [-->
-<!--{-->
-<!--"id": 293,-->
-<!--"title": "Event 1",-->
-<!--"url": "http://example.com",-->
-<!--"class": "event-important",-->
-<!--"start": 12039485678000, // Milliseconds-->
-<!--"end": 1234576967000 // Milliseconds-->
-<!--}-->
-<!--]});-->
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Twitter Bootstrap jQuery Calendar component</title>
 
-    <meta name="description"
-          content="Full view calendar component for twitter bootstrap with year, month, week, day views.">
+    <meta name="description" content="Full view calendar component for twitter bootstrap with year, month, week, day views.">
     <meta name="keywords" content="jQuery,Bootstrap,Calendar,HTML,CSS,JavaScript,responsive,month,week,year,day">
     <meta name="author" content="Serhioromano">
     <meta charset="UTF-8">
@@ -47,9 +18,8 @@
             background: rgba(0, 0, 0, 0) url(https://platform.twitter.com/widgets/images/btn.27237bab4db188ca749164efd38861b0.png) -20px 6px no-repeat;
             background-position: -20px 11px !important;
         }
-
         .btn-twitter:hover {
-            background-position: -20px -18px !important;
+            background-position:  -20px -18px !important;
         }
     </style>
 </head>
@@ -62,17 +32,8 @@
 
         <a class="btn btn-inverse" href="https://github.com/Serhioromano/bootstrap-calendar">Fork on GitHub</a>
         <a class="btn" href="index-bs3.html">Use bootstrap 3</a>
-        <a href="https://twitter.com/serhioromano" class="btn btn-twitter" data-show-count="false" data-size="large">Follow
-            @serhioromano</a>
-        <script>!function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-            if (!d.getElementById(id)) {
-                js = d.createElement(s);
-                js.id = id;
-                js.src = p + '://platform.twitter.com/widgets.js';
-                fjs.parentNode.insertBefore(js, fjs);
-            }
-        }(document, 'script', 'twitter-wjs');
+        <a href="https://twitter.com/serhioromano" class="btn btn-twitter" data-show-count="false" data-size="large">Follow @serhioromano</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
         </script>
     </div>
 
@@ -146,8 +107,7 @@
     <br><br>
 
     <div id="disqus_thread"></div>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
-        Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
     <div class="modal hide fade" id="events-modal">
         <div class="modal-header">
@@ -183,10 +143,8 @@
 
     <script type="text/javascript">
         var disqus_shortname = 'bootstrapcalendar'; // required: replace example with your forum shortname
-        (function () {
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();

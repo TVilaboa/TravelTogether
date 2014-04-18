@@ -44,8 +44,8 @@ public class Register extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
-        String user = req.getParameter(Constants.LOGIN_USERNAME_FIELD);
-        String pass = req.getParameter(Constants.LOGIN_PASSWORD_FIELD);
+        String user = req.getParameter(Constants.REGISTER_USERNAME_FIELD);
+        String pass = req.getParameter(Constants.REGISTER_PASSWORD_FIELD);
         String email = req.getParameter("Email");
         if (email.equals("") || user.equals("") || pass.equals(""))
             JOptionPane.showMessageDialog(null, "Datos ingresados incorrectamente");
