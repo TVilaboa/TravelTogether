@@ -23,7 +23,7 @@ public class DatabaseConnection {
 
     public void establishConnection(String server, String user, String password) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("org.hsqldb.jdbcDriver");
             connection = DriverManager.getConnection(server, user, password);
         } catch (Exception e) {
             System.out.println("Connection failed");

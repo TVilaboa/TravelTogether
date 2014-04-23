@@ -21,12 +21,7 @@ public class MyServletContext implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        System.out.println("Context Created");
-        context = servletContextEvent.getServletContext();
 
-        // set variable to servlet context
-
-        context.setAttribute("TEST", "TEST_VALUE");
 
 
         hsqlServer = new Server();
@@ -41,11 +36,23 @@ public class MyServletContext implements ServletContextListener {
         // The actual database will be named 'xdb' and its
         // settings and data will be stored in files
         // testdb.properties and testdb.script
-        hsqlServer.setDatabaseName(0, "xdb");
-        hsqlServer.setDatabasePath(0, "file:testdb");
+        hsqlServer.setDatabaseName(0, "TravelTogether");
+        String s = this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
+        s = "file:" + s.split("out")[0] + "DataBase/";
+        s = s.replace('%', ' ');
+        System.out.println(s);
+        hsqlServer.setDatabasePath(0, s);
+        System.out.println(hsqlServer.getDatabasePath(0, true));
 
         // Start the database!
         hsqlServer.start();
+
+        System.out.println("Context Created");
+        context = servletContextEvent.getServletContext();
+
+        // set variable to servlet context
+
+        context.setAttribute("TEST", "TEST_VALUE");
 
 
     }

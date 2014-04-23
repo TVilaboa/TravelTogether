@@ -1,6 +1,8 @@
 package hibernate;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,9 +21,23 @@ public class EventsEntity {
     private Integer start;
     private Integer end;
 
+    private Set<UsersEntity> users = new HashSet<UsersEntity>();
+
+    public EventsEntity() {
+    }
+
+    public EventsEntity(int id, String title, String url, String clazz, Integer start, Integer end, Set<UsersEntity> users) {
+        this.id = id;
+        this.title = title;
+        this.url = url;
+        this.clazz = clazz;
+        this.start = start;
+        this.end = end;
+        this.users = users;
+    }
 
     @Id
-    @Column(name = "ID", nullable = false, insertable = true, updatable = true)
+    @Column(name = "event_ID", nullable = false, insertable = true, updatable = true)
     public int getId() {
         return id;
     }
@@ -106,5 +122,16 @@ public class EventsEntity {
         result = 31 * result + (start != null ? start.hashCode() : 0);
         result = 31 * result + (end != null ? end.hashCode() : 0);
         return result;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = UsersEntity.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "EVENTS_USERS", joinColumns = {@JoinColumn(name = "EVENT_ID", referencedColumnName = "event_id")}, inverseJoinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "user_id")})
+
+    public Set<UsersEntity> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<UsersEntity> users) {
+        this.users = users;
     }
 }

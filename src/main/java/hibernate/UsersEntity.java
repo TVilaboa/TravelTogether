@@ -1,6 +1,8 @@
 package hibernate;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,6 +20,8 @@ public class UsersEntity {
     private String user;
     private String pass;
     private String email;
+    private Set<EventsEntity> events = new HashSet<EventsEntity>();
+
 
     public UsersEntity(String user, String pass) {
         this.user = user;
@@ -35,7 +39,7 @@ public class UsersEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false, insertable = true, updatable = true, unique = true)
+    @Column(name = "user_id", nullable = false, insertable = true, updatable = true, unique = true)
     public int getId() {
         return id;
     }
@@ -96,5 +100,14 @@ public class UsersEntity {
         result = 31 * result + (pass != null ? pass.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = EventsEntity.class, mappedBy = "users", cascade = CascadeType.ALL)
+    public Set<EventsEntity> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<EventsEntity> events) {
+        this.events = events;
     }
 }

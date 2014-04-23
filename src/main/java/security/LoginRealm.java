@@ -1,5 +1,6 @@
 package security;
 
+import hibernate.EventsEntity;
 import hibernate.Main;
 import hibernate.UsersEntity;
 import org.hibernate.Query;
@@ -8,6 +9,7 @@ import org.securityfilter.realm.SimpleSecurityRealmBase;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -54,6 +56,11 @@ public class LoginRealm extends SimpleSecurityRealmBase {
             return false;
         }
         UsersEntity dbuser = (UsersEntity) results.get(0);
+        Set<EventsEntity> events = dbuser.getEvents();
+        System.out.println(events == null);
+
+        System.out.println(events.isEmpty());
+
         if (dbuser.getPass().equals(password)) {
             JOptionPane.showMessageDialog(null, "login ok");
 

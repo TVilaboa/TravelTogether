@@ -16,7 +16,7 @@ public class TestBD {
     {
         Connection miConexion;
         DatabaseConnection db=new DatabaseConnection();
-        db.establishConnection("jdbc:mysql://localhost/mydb","root","qweasdrtyfgh22");
+        db.establishConnection("jdbc:hsqldb:mydatabase", "SA", "");
         miConexion=db.getConnection();
 
         if(miConexion!=null)
