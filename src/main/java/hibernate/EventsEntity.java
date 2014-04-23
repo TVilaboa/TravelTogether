@@ -18,15 +18,15 @@ public class EventsEntity {
     private String title;
     private String url;
     private String clazz;
-    private Integer start;
-    private Integer end;
+    private Long start;
+    private Long end;
 
     private Set<UsersEntity> users = new HashSet<UsersEntity>();
 
     public EventsEntity() {
     }
 
-    public EventsEntity(int id, String title, String url, String clazz, Integer start, Integer end, Set<UsersEntity> users) {
+    public EventsEntity(int id, String title, String url, String clazz, Long start, Long end, Set<UsersEntity> users) {
         this.id = id;
         this.title = title;
         this.url = url;
@@ -78,21 +78,21 @@ public class EventsEntity {
 
     @Basic
     @Column(name = "START", nullable = true, insertable = true, updatable = true)
-    public Integer getStart() {
+    public Long getStart() {
         return start;
     }
 
-    public void setStart(Integer start) {
+    public void setStart(Long start) {
         this.start = start;
     }
 
     @Basic
     @Column(name = "END", nullable = true, insertable = true, updatable = true)
-    public Integer getEnd() {
+    public Long getEnd() {
         return end;
     }
 
-    public void setEnd(Integer end) {
+    public void setEnd(Long end) {
         this.end = end;
     }
 

@@ -21,9 +21,13 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String user = req.getParameter("user");
         String pass = req.getParameter("password");
+
         LoginRealm realm = new LoginRealm();
         if (realm.booleanAuthenticate(user, pass)) {
+            req.getSession().setAttribute("username", user);
             resp.sendRedirect(resp.encodeRedirectURL("/Secure/welcome.jsp"));
+
+
         } else
             resp.sendRedirect("/login.jsp");
 

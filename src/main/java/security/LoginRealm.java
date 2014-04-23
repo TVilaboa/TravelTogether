@@ -1,6 +1,5 @@
 package security;
 
-import hibernate.EventsEntity;
 import hibernate.Main;
 import hibernate.UsersEntity;
 import org.hibernate.Query;
@@ -8,8 +7,6 @@ import org.hibernate.Session;
 import org.securityfilter.realm.SimpleSecurityRealmBase;
 
 import javax.swing.*;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -50,16 +47,12 @@ public class LoginRealm extends SimpleSecurityRealmBase {
         String hql = "FROM UsersEntity U WHERE U.user = :username";
         Query query = session.createQuery(hql);
         query.setParameter("username", username);
-        List results = query.list();
-        if (results.isEmpty()) {
+        UsersEntity dbuser = (UsersEntity) query.uniqueResult();
+        if (dbuser == null) {
             JOptionPane.showMessageDialog(null, "user doesnt exist");
             return false;
         }
-        UsersEntity dbuser = (UsersEntity) results.get(0);
-        Set<EventsEntity> events = dbuser.getEvents();
-        System.out.println(events == null);
 
-        System.out.println(events.isEmpty());
 
         if (dbuser.getPass().equals(password)) {
             JOptionPane.showMessageDialog(null, "login ok");

@@ -47,7 +47,7 @@ public class Register extends HttpServlet {
     private void register(String user, String pass, String email, HttpServletResponse resp) throws IOException {
         Session session = Main.getSession();
         Transaction tx = null;
-        EventsEntity e = new EventsEntity(500, "hola", "ulr", "asd", 5, 6, null);
+        EventsEntity e = new EventsEntity(500, "hola", "http://www.example.com/", "event-special", 1363197600000L, 1363629686400L, null);
         try {
             tx = session.beginTransaction();
 
