@@ -124,7 +124,7 @@ public class EventsEntity {
         return result;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = UsersEntity.class, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = UsersEntity.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "EVENTS_USERS", joinColumns = {@JoinColumn(name = "EVENT_ID", referencedColumnName = "event_id")}, inverseJoinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "user_id")})
 
     public Set<UsersEntity> getUsers() {

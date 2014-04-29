@@ -12,5 +12,10 @@
 </head>
 <body>
 Welcome
+<form id="Calendar"
+      action="${pageContext.request.contextPath}/Secure/calendar/calendar" method="POST">
+
+    <input type="submit">
+</form>
 </body>
 </html>

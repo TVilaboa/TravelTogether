@@ -24,7 +24,6 @@ public class Login extends HttpServlet {
 
         LoginRealm realm = new LoginRealm();
         if (realm.booleanAuthenticate(user, pass)) {
-            req.getSession().setAttribute("username", user);
             resp.sendRedirect(resp.encodeRedirectURL("/Secure/welcome.jsp"));
 
 

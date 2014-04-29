@@ -59,7 +59,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>calendar</servlet-name>
-        <url-pattern>/calendar.html</url-pattern>
+        <url-pattern>/Secure/calendar/calendar</url-pattern>
     </servlet-mapping>
 
 

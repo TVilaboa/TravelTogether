@@ -6,6 +6,6 @@
 <body>
 <h1>SecurityFilter Example Application: servlets.Login Error Page</h1>
 <%@include file="/menu.jsp" %>
-Bad username/password combination, please <a href="<%=response.encodeURL("loginForm.jsp")%>">try again</a>.
+Bad username/password combination, please <a href="<%=response.encodeURL("login.jsp")%>">try again</a>.
 </body>
 </html>
