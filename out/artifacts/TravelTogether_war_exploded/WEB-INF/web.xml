@@ -43,6 +43,11 @@
         <servlet-name>register</servlet-name>
         <servlet-class>servlets.Register</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>calendar</servlet-name>
+        <servlet-class>servlets.Calendar</servlet-class>
+    </servlet>
+
 
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -52,13 +57,17 @@
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>calendar</servlet-name>
+        <url-pattern>/Secure/calendar/calendar</url-pattern>
+    </servlet-mapping>
 
 
     <listener>
-                  <listener-class>
-                      servlets.MyServletContext
-                  </listener-class>
-           </listener>
+        <listener-class>
+            servlets.MyServletContext
+        </listener-class>
+    </listener>
 
 </web-app>
 
