@@ -1,1 +1,0 @@
-{"success": 1, "result": [{"id":500,"title":"hola","url":"http://www.example.com/","class":"event-special","start":1363197600000,"end":1363629686400}]}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Twitter Bootstrap jQuery Calendar component</title>
 
@@ -26,7 +26,7 @@
 <body>
 <div class="container">
     <div class="hero-unit">
-        <h1>Bootstrap Calendar Demo</h1>
+        <h1>Itinerary</h1>
 
         <p>Bootstrap based full view calendar. Template based.</p>
 
@@ -93,6 +93,85 @@
             <h4>Events</h4>
             <small>This list is populated with events dynamically</small>
             <ul id="eventlist" class="nav nav-list"></ul>
+            <!-- Button to trigger modal -->
+            <a href="#myModal" role="button" class="btn" data-toggle="modal">Add event</a>
+
+            <!-- Modal -->
+            <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">Add event</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="addEventForm" action="/Secure/calendar/addEvent" method="POST" class="form-horizontal"
+                          role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Title</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" id="Title" type="text"
+                                       value="Your title,hotel,etc">
+                            </div>
+                            <label class="col-sm-2 control-label">URL</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" id="URL" type="text"
+                                       value="www.example.com">
+                            </div>
+                            <label class="col-sm-2 control-label">From:</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" id="From" type="text"
+                                       value="Where are you now">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                To:
+                            </label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" id="disabledInput" type="text"
+                                       placeholder="Where are you traveling" disabled>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <label>Date range</label>
+
+                            <div class="input">
+                                <div class="inline-inputs">
+                                    <input class="small" type="text" value="May 1, 2011"/>
+                                    <input class="mini" type="text" value="12:00am"/>
+                                    to
+                                    <input class="small" type="text" value="May 8, 2011"/>
+                                    <input class="mini" type="text" value="11:59pm"/>
+                                    <span class="help-block">All times are shown as Pacific Standard Time (GMT -08:00).</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="radio">
+                            <label class="checkbox-inLine">
+                                <input onclick="document.getElementById('disabledInput').disabled = true;" type="radio"
+                                       name="optionsRadios" id="Staying"
+                                       value="Staying" checked> Staying
+                            </label>
+                            <label class="checkbox-inLine">
+                                <input onclick="document.getElementById('disabledInput').disabled = false;" type="radio"
+                                       name="optionsRadios" id="Traveling"
+                                       value="Traveling">
+                                Traveling
+                            </label>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                            <button type="submit" id="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
         </div>
     </div>
 
@@ -152,7 +231,31 @@
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("input#submit").click(function () {
+                //Serialize the form and post it to the server
+                $.post("/Secure/calendar/addEvent", $('#addEventForm').serialize(), function () {
 
+                    // When this executes, we know the form was submitted
+
+                    // To give some time for the animation,
+                    // let's add a delay of 200 ms before the redirect
+                    var delay = 200;
+                    setTimeout(function () {
+                        window.location.href = '/Secure/calendar/calendar.html';
+                    }, delay);
+
+                    // Hide the modal
+                    $("#my-modal").modal('hide');
+
+                });
+
+                // Stop the normal form submission
+                return false;
+            });
+        });
+    </script>
 
 </div>
 </body>

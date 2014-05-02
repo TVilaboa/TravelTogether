@@ -28,7 +28,7 @@ import java.util.Set;
  */
 public class Calendar extends HttpServlet {
 
-
+    File f = loadFile();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -47,19 +47,14 @@ public class Calendar extends HttpServlet {
     }
 
     private void createCalendar(UsersEntity user, HttpServletRequest req) {
-//        String s = this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
-//        s = s.split("out")[0] + "web/Secure/calendar/events.json.php";
-//        File f = new File(s);
         Gson gson = new Gson();
         Set<EventsEntity> events = user.getEvents();
         Set<EventJSONWrapper> wrappedEvents = new HashSet<>();
         for (EventsEntity event : events) {
             wrappedEvents.add(new EventJSONWrapper(event));
         }
-        File f = loadFile();
 
 
-        System.out.println(f.getAbsolutePath());
         try (PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter(f)))) {
             String json = "{\"success\": 1, \"result\": " + gson.toJson(wrappedEvents) + "}";
             json = json.replace("clazz", "class");
@@ -70,7 +65,7 @@ public class Calendar extends HttpServlet {
     }
 
     private File loadFile() {
-        JOptionPane.showMessageDialog(null, "A continuacion elija el archivo que quiere analizar");
+        JOptionPane.showMessageDialog(null, "A continuacion elija el archivo que se va a utilizar para guardar los eventos");
         JFileChooser chooser = new JFileChooser();
 
         int returnVal = chooser.showOpenDialog(null);
