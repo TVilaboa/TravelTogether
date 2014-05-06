@@ -18,7 +18,15 @@ public class AddEvent extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("holis");
+        System.out.println(req.getParameter("Title"));
+        System.out.println(req.getParameter("URL"));
+        System.out.println(req.getParameter("From"));
+        System.out.println(req.getParameter("To"));
+        System.out.println(req.getParameter("StartDay"));
+        System.out.println(req.getParameter("StartHour"));
+        System.out.println(req.getParameter("EndDay"));
+        System.out.println(req.getParameter("EndHour"));
+        System.out.println(req.getParameter("optionsRadios"));
         resp.sendRedirect("calendar");
     }
 }

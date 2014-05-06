@@ -46,6 +46,22 @@ public class Calendar extends HttpServlet {
         resp.sendRedirect("calendar.html");
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            Session session = Main.getSession();
+            String hql = "FROM UsersEntity U WHERE U.user = :username";
+            Query query = session.createQuery(hql);
+            query.setParameter("username", ((SimplePrincipal) req.getSession().getAttribute("org.securityfilter.filter.SecurityRequestWrapper.PRINCIPAL")).getName());
+            UsersEntity dbuser = (UsersEntity) query.uniqueResult();
+            createCalendar(dbuser, req);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        resp.sendRedirect("calendar.html");
+    }
+
     private void createCalendar(UsersEntity user, HttpServletRequest req) {
         Gson gson = new Gson();
         Set<EventsEntity> events = user.getEvents();
