@@ -43,6 +43,7 @@ public class Calendar extends HttpServlet {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+
         resp.sendRedirect("calendar.html");
     }
 
@@ -50,10 +51,18 @@ public class Calendar extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             Session session = Main.getSession();
+            String params = req.getQueryString();
+            params = params.substring(5); //deletes user=
+            System.out.println(params);
             String hql = "FROM UsersEntity U WHERE U.user = :username";
             Query query = session.createQuery(hql);
-            query.setParameter("username", ((SimplePrincipal) req.getSession().getAttribute("org.securityfilter.filter.SecurityRequestWrapper.PRINCIPAL")).getName());
+            query.setParameter("username", params);
             UsersEntity dbuser = (UsersEntity) query.uniqueResult();
+            if (dbuser == null) {
+                JOptionPane.showMessageDialog(null, "Incorrect user");
+                resp.sendRedirect("welcome.jsp");
+                return;
+            }
             createCalendar(dbuser, req);
         } catch (HibernateException e) {
             e.printStackTrace();

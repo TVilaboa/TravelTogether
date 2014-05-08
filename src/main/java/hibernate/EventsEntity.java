@@ -37,7 +37,8 @@ public class EventsEntity {
     }
 
     @Id
-    @Column(name = "event_ID", nullable = false, insertable = true, updatable = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "event_ID", nullable = false, insertable = true, updatable = true, unique = true)
     public int getId() {
         return id;
     }
