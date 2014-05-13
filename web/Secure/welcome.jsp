@@ -16,6 +16,8 @@ Welcome
       action="${pageContext.request.contextPath}/Secure/calendar/calendar" method="POST">
 
     <input type="submit">
+
+    //TODO add input to send user via get and see others itineraries
 </form>
 </body>
 </html>

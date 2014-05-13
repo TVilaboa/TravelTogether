@@ -16,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
 import java.io.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,36 +27,40 @@ import java.util.Set;
  */
 public class Calendar extends HttpServlet {
 
-    File f = loadFile();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        UsersEntity dbuser = null;
         try {
             Session session = Main.getSession();
             String hql = "FROM UsersEntity U WHERE U.user = :username";
             Query query = session.createQuery(hql);
             query.setParameter("username", ((SimplePrincipal) req.getSession().getAttribute("org.securityfilter.filter.SecurityRequestWrapper.PRINCIPAL")).getName());
-            UsersEntity dbuser = (UsersEntity) query.uniqueResult();
+
+            dbuser = (UsersEntity) query.uniqueResult();
             createCalendar(dbuser, req);
         } catch (HibernateException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
-        resp.sendRedirect("calendar.html");
+        req.getSession().setAttribute("matchingUsers", getMatchingUsers(dbuser.getId()));
+
+        resp.sendRedirect("calendar.jsp?user_id=" + dbuser.getId());
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        UsersEntity dbuser = null;
         try {
             Session session = Main.getSession();
-            String params = req.getQueryString();
-            params = params.substring(5); //deletes user=
-            System.out.println(params);
+
+            String user = req.getParameter("user");
+
             String hql = "FROM UsersEntity U WHERE U.user = :username";
             Query query = session.createQuery(hql);
-            query.setParameter("username", params);
-            UsersEntity dbuser = (UsersEntity) query.uniqueResult();
+            query.setParameter("username", user);
+            dbuser = (UsersEntity) query.uniqueResult();
             if (dbuser == null) {
                 JOptionPane.showMessageDialog(null, "Incorrect user");
                 resp.sendRedirect("welcome.jsp");
@@ -68,7 +71,8 @@ public class Calendar extends HttpServlet {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        resp.sendRedirect("calendar.html");
+        req.getSession().setAttribute("matchingUsers", getMatchingUsers(dbuser.getId()));
+        resp.sendRedirect("calendar.jsp?user_id=" + dbuser.getId());
     }
 
     private void createCalendar(UsersEntity user, HttpServletRequest req) {
@@ -78,9 +82,13 @@ public class Calendar extends HttpServlet {
         for (EventsEntity event : events) {
             wrappedEvents.add(new EventJSONWrapper(event));
         }
+        String s = this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
+        s = s.split("out")[0] + "\\out\\artifacts\\TravelTogether_war_exploded\\Secure\\calendar\\events.json.php";
+        s = s.replace('%', ' ');
+        s = s.replace("20", "");
 
 
-        try (PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter(f)))) {
+        try (PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter(new File(s))))) {
             String json = "{\"success\": 1, \"result\": " + gson.toJson(wrappedEvents) + "}";
             json = json.replace("clazz", "class");
             pr.write(json);
@@ -100,5 +108,30 @@ public class Calendar extends HttpServlet {
         return null;
     }
 
+    private List<UsersEntity> getMatchingUsers(int id) {
+        //AddEvent.java comments on problems with this aproach
+        UsersEntity dbuser = null;
+        List<UsersEntity> users = new ArrayList<>();
+        try {
+            Session hibernateSession = Main.getSession();
+
+
+            String hql = "FROM UsersEntity U WHERE U.id = :userid";
+            Query query = hibernateSession.createQuery(hql);
+            query.setParameter("userid", id);
+
+
+            for (Iterator iterator = query.iterate(); iterator.hasNext(); ) {
+                users.add((UsersEntity) iterator.next());
+            }
+
+
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return users;
+
+    }
 
 }

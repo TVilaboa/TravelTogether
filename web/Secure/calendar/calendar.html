@@ -104,8 +104,34 @@
             <h4>Events</h4>
             <small>Events</small>
             <ul id="eventlist" class="nav nav-list"></ul>
+            //TODO add list of matching users(¿ All together or each event in one web?) calendar servlet passes user_id
+
             <!-- Button to trigger modal -->
             <a href="#myModal" role="button" class="btn" data-toggle="modal">Add event</a>
+
+            <!-- jsp to print matching users-->
+            <% UsersEntity dbuser=null;
+            try {
+            Session session = Main.getSession();
+
+            String user=req.getParameter("user");
+
+            String hql = "FROM UsersEntity U WHERE U.user = :username";
+            Query query = session.createQuery(hql);
+            query.setParameter("username", user);
+            dbuser = (UsersEntity) query.uniqueResult();
+            if (dbuser == null) {
+            JOptionPane.showMessageDialog(null, "Incorrect user");
+            resp.sendRedirect("welcome.jsp");
+            return;
+            }
+            createCalendar(dbuser, req);
+            } catch (HibernateException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+            resp.sendRedirect("calendar.html?user_id=" + dbuser.getId());
+            %>
 
             <!-- Modal -->
             <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"

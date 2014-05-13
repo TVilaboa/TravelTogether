@@ -40,6 +40,7 @@ public class MyServletContext implements ServletContextListener {
         String s = this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
         s = "file:" + s.split("out")[0] + "DataBase/";
         s = s.replace('%', ' ');
+        s = s.replace("20", "");
 
         hsqlServer.setDatabasePath(0, s);
 
