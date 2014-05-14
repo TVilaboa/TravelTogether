@@ -102,7 +102,7 @@ public class UsersEntity {
         return result;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = EventsEntity.class, mappedBy = "users", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = EventsEntity.class, mappedBy = "user", cascade = CascadeType.ALL)
     public Set<EventsEntity> getEvents() {
         return events;
     }

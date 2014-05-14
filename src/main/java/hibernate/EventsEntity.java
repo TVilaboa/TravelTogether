@@ -1,8 +1,6 @@
 package hibernate;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,19 +19,19 @@ public class EventsEntity {
     private Long start;
     private Long end;
 
-    private Set<UsersEntity> users = new HashSet<UsersEntity>();
+    private UsersEntity user;
 
     public EventsEntity() {
     }
 
-    public EventsEntity(int id, String title, String url, String clazz, Long start, Long end, Set<UsersEntity> users) {
-        this.id = id;
+    public EventsEntity(String title, String url, String clazz, Long start, Long end, UsersEntity user) {
+
         this.title = title;
         this.url = url;
         this.clazz = clazz;
         this.start = start;
         this.end = end;
-        this.users = users;
+        this.user = user;
     }
 
     @Id
@@ -125,14 +123,14 @@ public class EventsEntity {
         return result;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = UsersEntity.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = UsersEntity.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "EVENTS_USERS", joinColumns = {@JoinColumn(name = "EVENT_ID", referencedColumnName = "event_id")}, inverseJoinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "user_id")})
 
-    public Set<UsersEntity> getUsers() {
-        return users;
+    public UsersEntity getUser() {
+        return user;
     }
 
-    public void setUsers(Set<UsersEntity> users) {
-        this.users = users;
+    public void setUser(UsersEntity user) {
+        this.user = user;
     }
 }

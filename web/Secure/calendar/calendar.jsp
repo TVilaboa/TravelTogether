@@ -124,7 +124,7 @@
         //TODO add list of matching users(¿ All together or each event in one web?) calendar servlet passes user_id
 
         <!-- Button to trigger modal -->
-        <a href="#myModal" role="button" class="btn" data-toggle="modal">Add event</a>
+        <a href="#myModal" role="button" class="btn" data-toggle="modal" id="addEventModal">Add event</a>
 
         <!-- jsp to print matching users-->
 
@@ -308,9 +308,28 @@
             // Stop the normal form submission
             return false;
         });
+
     });
 </script>
 
+<script>
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+    $(document).ready(function () {
+        var userCalendar = getParameterByName("userCalendar");
+        var userSession = getParameterByName("userSession");
+        if (userCalendar.localeCompare(userSession) == 0) {
+
+        } else {
+            document.getElementById("addEventModal").disabled = true;
+        }
+
+    })
+</script>
 
 </div>
 </body>

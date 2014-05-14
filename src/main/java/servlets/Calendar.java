@@ -31,11 +31,12 @@ public class Calendar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UsersEntity dbuser = null;
+        String username = ((SimplePrincipal) req.getSession().getAttribute("org.securityfilter.filter.SecurityRequestWrapper.PRINCIPAL")).getName();
         try {
             Session session = Main.getSession();
             String hql = "FROM UsersEntity U WHERE U.user = :username";
             Query query = session.createQuery(hql);
-            query.setParameter("username", ((SimplePrincipal) req.getSession().getAttribute("org.securityfilter.filter.SecurityRequestWrapper.PRINCIPAL")).getName());
+            query.setParameter("username", username);
 
             dbuser = (UsersEntity) query.uniqueResult();
             createCalendar(dbuser, req);
@@ -46,12 +47,13 @@ public class Calendar extends HttpServlet {
 
         req.getSession().setAttribute("matchingUsers", getMatchingUsers(dbuser.getId()));
 
-        resp.sendRedirect("calendar.jsp?user_id=" + dbuser.getId());
+        resp.sendRedirect("calendar.jsp?userCalendar=" + username + "&userSession=" + username);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UsersEntity dbuser = null;
+        String username = ((SimplePrincipal) req.getSession().getAttribute("org.securityfilter.filter.SecurityRequestWrapper.PRINCIPAL")).getName();
         try {
             Session session = Main.getSession();
 
@@ -63,7 +65,7 @@ public class Calendar extends HttpServlet {
             dbuser = (UsersEntity) query.uniqueResult();
             if (dbuser == null) {
                 JOptionPane.showMessageDialog(null, "Incorrect user");
-                resp.sendRedirect("welcome.jsp");
+                resp.sendRedirect("/Secure/welcome.jsp");
                 return;
             }
             createCalendar(dbuser, req);
@@ -72,7 +74,7 @@ public class Calendar extends HttpServlet {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         req.getSession().setAttribute("matchingUsers", getMatchingUsers(dbuser.getId()));
-        resp.sendRedirect("calendar.jsp?user_id=" + dbuser.getId());
+        resp.sendRedirect("calendar.jsp?userCalendar=" + dbuser.getUser() + "&userSession=" + username);
     }
 
     private void createCalendar(UsersEntity user, HttpServletRequest req) {
