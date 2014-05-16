@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
+
 <html xmlns="http://www.w3.org/1999/html">
 <head>
 
@@ -128,13 +130,12 @@
 
         <!-- jsp to print matching users-->
 
-
+        <p>Matching users</p>
         <table>
-            <c:foreach items="<%=session.getAttribute("matchingUsers") %>" var="user">
-                <tr>
-                    <td><c:out value="${user.user}"></c:out></td>
-                </tr>
-            </c:foreach>
+
+            <%
+                out.print(request.getAttribute("matchingUsers"));
+            %>
         </table>
 
 

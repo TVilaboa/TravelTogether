@@ -47,7 +47,8 @@ public class Register extends HttpServlet {
     private void register(String user, String pass, String email, HttpServletResponse resp) throws IOException {
         Session session = Main.getSession();
         Transaction tx = null;
-        EventsEntity e = new EventsEntity("hola", "http://www.example.com/", "event-special", 1363197600000L, 1363629686400L, null);
+        EventsEntity e = new EventsEntity("", "http://www.example.com/", "event-special", 1363197600000L, 1363629686400L, null);
+        e.setTitle("Traveling from " + "default" + " to " + "default" + " . " + "holaa");
         try {
             tx = session.beginTransaction();
 
@@ -77,7 +78,7 @@ public class Register extends HttpServlet {
             session.save(userE);
 
             e.setUser(userE);
-            session.save(e);
+
             tx.commit();
             JOptionPane.showMessageDialog(null, "Succesfully registered");
         } catch (HibernateException ex) {

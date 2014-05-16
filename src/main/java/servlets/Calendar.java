@@ -10,13 +10,18 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.securityfilter.realm.SimplePrincipal;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -44,10 +49,19 @@ public class Calendar extends HttpServlet {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+        ServletContext sc = getServletContext();
+        RequestDispatcher rd = sc.getRequestDispatcher("/Secure/calendar/calendar.jsp?userCalendar=" + username + "&userSession=" + username);
 
-        req.getSession().setAttribute("matchingUsers", getMatchingUsers(dbuser.getId()));
+        String matchs = "";
+        for (String s : getMatchingUsers(dbuser.getId()))
+            matchs += ("<tr><td>" + s + "</td></tr>");
+        req.setAttribute("matchingUsers", matchs);
 
-        resp.sendRedirect("calendar.jsp?userCalendar=" + username + "&userSession=" + username);
+        rd.forward(req, resp);
+
+
+
+
     }
 
     @Override
@@ -73,8 +87,17 @@ public class Calendar extends HttpServlet {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        req.getSession().setAttribute("matchingUsers", getMatchingUsers(dbuser.getId()));
-        resp.sendRedirect("calendar.jsp?userCalendar=" + dbuser.getUser() + "&userSession=" + username);
+
+        ServletContext sc = getServletContext();
+        RequestDispatcher rd = sc.getRequestDispatcher("/Secure/calendar/calendar.jsp?userCalendar=" + dbuser.getUser() + "&userSession=" + username);
+
+        String matchs = "";
+        for (String s : getMatchingUsers(dbuser.getId()))
+            matchs += ("<tr><td>" + s + "</td></tr>");
+        req.setAttribute("matchingUsers", matchs);
+
+        rd.forward(req, resp);
+
     }
 
     private void createCalendar(UsersEntity user, HttpServletRequest req) {
@@ -110,23 +133,38 @@ public class Calendar extends HttpServlet {
         return null;
     }
 
-    private List<UsersEntity> getMatchingUsers(int id) {
-        //AddEvent.java comments on problems with this aproach
-        UsersEntity dbuser = null;
-        List<UsersEntity> users = new ArrayList<>();
+    private List<String> getMatchingUsers(int id) {
+
+
+        List<String> users = new ArrayList<>();
+
         try {
             Session hibernateSession = Main.getSession();
-
-
             String hql = "FROM UsersEntity U WHERE U.id = :userid";
             Query query = hibernateSession.createQuery(hql);
             query.setParameter("userid", id);
+            Set<EventsEntity> userEvents = ((UsersEntity) query.uniqueResult()).getEvents();
+            hql = "FROM UsersEntity U";
+            query = hibernateSession.createQuery(hql);
+            List<UsersEntity> allUsers = (List<UsersEntity>) query.list();
+            for (UsersEntity user : allUsers) {
+                if (user.getId() != id) {
+                    for (EventsEntity event : user.getEvents()) {
+                        for (EventsEntity userEvent : userEvents) {
+                            if (userEvent.getStart() - event.getStart() < 86400000 &&
+                                    userEvent.getStart() - event.getStart() > -86400000) {
+
+                                if (userEvent.getTitle().split("\\.")[0].equals(event.getTitle().split("\\.")[0])) {
+                                    users.add(user.getUser() + " in " + event.getTitle().split("\\.")[0]);
+                                }
 
 
-            for (Iterator iterator = query.iterate(); iterator.hasNext(); ) {
-                users.add((UsersEntity) iterator.next());
+                            }
+
+                        }
+                    }
+                }
             }
-
 
         } catch (HibernateException e) {
             e.printStackTrace();
