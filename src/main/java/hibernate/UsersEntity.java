@@ -21,6 +21,7 @@ public class UsersEntity {
     private String pass;
     private String email;
     private Set<EventsEntity> events = new HashSet<EventsEntity>();
+    private Set<MessageEntity> messages = new HashSet<>();
 
 
     public UsersEntity(String user, String pass) {
@@ -109,5 +110,15 @@ public class UsersEntity {
 
     public void setEvents(Set<EventsEntity> events) {
         this.events = events;
+    }
+
+
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = MessageEntity.class, mappedBy = "user", cascade = CascadeType.ALL)
+    public Set<MessageEntity> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<MessageEntity> messages) {
+        this.messages = messages;
     }
 }

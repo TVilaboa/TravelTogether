@@ -9,9 +9,10 @@
         <property name="connection.username">SA</property>
         <property name="connection.password"></property>
         <property name="hbm2ddl.auto">create</property>
-        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
         <mapping class="hibernate.UsersEntity"/>
         <mapping class="hibernate.EventsEntity"/>
+        <mapping class="hibernate.MessageEntity"/>
 
 
     </session-factory>

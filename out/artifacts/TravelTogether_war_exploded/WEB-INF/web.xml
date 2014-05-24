@@ -47,6 +47,14 @@
         <servlet-name>calendar</servlet-name>
         <servlet-class>servlets.Calendar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addEvent</servlet-name>
+        <servlet-class>servlets.AddEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sendMessage</servlet-name>
+        <servlet-class>servlets.SendMessage</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -60,6 +68,14 @@
     <servlet-mapping>
         <servlet-name>calendar</servlet-name>
         <url-pattern>/Secure/calendar/calendar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addEvent</servlet-name>
+        <url-pattern>/Secure/calendar/addEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sendMessage</servlet-name>
+        <url-pattern>/Secure/calendar/sendMessage</url-pattern>
     </servlet-mapping>
 
 

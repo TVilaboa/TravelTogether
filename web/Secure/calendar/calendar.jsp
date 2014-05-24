@@ -123,10 +123,10 @@
         <h4>Events</h4>
         <small>Events</small>
         <ul id="eventlist" class="nav nav-list"></ul>
-        //TODO add list of matching users(¿ All together or each event in one web?) calendar servlet passes user_id
 
         <!-- Button to trigger modal -->
         <a href="#myModal" role="button" class="btn" data-toggle="modal" id="addEventModal">Add event</a>
+
 
         <!-- jsp to print matching users-->
 
@@ -147,7 +147,7 @@
                 <h3 id="myModalLabel">Add event</h3>
             </div>
             <div class="modal-body">
-                <form id="addEventForm" action="/Secure/calendar/addEvent" method="POST" class="form-horizontal"
+                <form id="addEventForm" action="addEvent" method="POST" class="form-horizontal"
                       role="form">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Title</label>
@@ -185,10 +185,10 @@
 
                         <div class="input" id="dates">
                             <div class="inline-inputs">
-                                <input class="small" type="text" value="07/05/2014" id="StartDay" name="StartDay"/>
+                                <input class="small" type="text" value="05/21/2014" id="StartDay" name="StartDay"/>
                                 <input class="mini" type="text" value="08:00" id="StartHour" name="StartHour"/>
                                 to
-                                <input class="small" type="text" value="07/05/2014" id="EndDay" name="EndDay"/>
+                                <input class="small" type="text" value="05/21/2014" id="EndDay" name="EndDay"/>
                                 <input class="mini" type="text" value="23:52" id="EndHour" name="EndHour"/>
                                 <span class="help-block">UTC</span>
                             </div>
@@ -210,7 +210,7 @@
                         </label>
                     </div>
                     <div class="modal-footer">
-                        <p>Adds to your own calendar, not necessarily the one you are seeing!!</p>
+
                         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                         <button type="submit" id="submit" class="btn btn-primary">Save Changes</button>
                     </div>
@@ -219,6 +219,40 @@
 
 
         </div>
+
+
+        <%--Inbox Modal--%>
+
+        <div id="myMessageModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myMesageModalLabel">Send Message</h3>
+            </div>
+            <div class="modal-body">
+                <form id="sendMessageForm" action="sendMessage" method="POST" class="form-horizontal"
+                      role="form">
+                    <div class="form-group">
+
+
+                        <div>
+
+                            <textarea class="form-control" id="Message" name="Message"
+                                    >Hi, we share some events!!....</textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                        <button type="submit" id="send" class="btn btn-primary">Send</button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+
     </div>
 </div>
 
@@ -290,7 +324,7 @@
     $(document).ready(function () {
         $("input#submit").click(function () {
             //Serialize the form and post it to the server
-            $.post("/Secure/calendar/addEvent", $('#addEventForm').serialize(), function () {
+            $.post("/Secure/calendar/addEvent", $('#sendMessageForm').serialize(), function () {
 
                 // When this executes, we know the form was submitted
 
@@ -312,6 +346,34 @@
 
     });
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input#send").click(function () {
+            //Serialize the form and post it to the server
+            $.post("/Secure/calendar/SendMessage", $('#addEventForm').serialize(), function () {
+
+                // When this executes, we know the form was submitted
+
+                // To give some time for the animation,
+                // let's add a delay of 200 ms before the redirect
+                var delay = 200;
+                setTimeout(function () {
+                    window.location.href = '/Secure/calendar/calendar.html';
+                }, delay);
+
+                // Hide the modal
+                $("#my-message-modal").modal('hide');
+
+            });
+
+            // Stop the normal form submission
+            return false;
+        });
+
+    });
+</script>
+
 
 <script>
     function getParameterByName(name) {
