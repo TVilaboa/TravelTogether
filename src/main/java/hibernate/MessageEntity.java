@@ -43,7 +43,7 @@ public class MessageEntity {
 
 
     @Basic
-    @Column(name = "SENDER", nullable = false, insertable = false, updatable = false, length = 45)
+    @Column(name = "SENDER", nullable = false, insertable = true, updatable = false, length = 45)
     public String getSender() {
         return sender;
     }

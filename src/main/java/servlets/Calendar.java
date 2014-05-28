@@ -61,8 +61,6 @@ public class Calendar extends HttpServlet {
         rd.forward(req, resp);
 
 
-
-
     }
 
     @Override
@@ -157,7 +155,7 @@ public class Calendar extends HttpServlet {
                                     userEvent.getStart() - event.getStart() > -86400000) {
 
                                 if (userEvent.getTitle().split("\\.")[0].equals(event.getTitle().split("\\.")[0])) {
-                                    users.add("<a href=\"#myMessageModal\"  data-toggle=\"modal\"  >" + user.getUser() + "</a>" + " in " + event.getTitle().split("\\.")[0]);
+                                    users.add("<a href=\"#myMessageModal\" data-id=\"" + user.getUser() + "\" class=\"open-sendMessageModal\" data-toggle=\"modal\"  >" + user.getUser() + "</a>" + " in " + event.getTitle().split("\\.")[0]);
                                 }
 
 

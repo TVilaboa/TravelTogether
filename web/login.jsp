@@ -8,11 +8,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns="http://www.w3.org/1999/html">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+<%--<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">--%>
+<%--<script src="http://code.jquery.com/jquery-1.9.0.js"></script>--%>
 
-<script type="text/javascript" src="styles/components/underscore/underscore-min.js"></script>
-<script type="text/javascript" src="styles/components/bootstrap2/js/bootstrap.min.js"></script>
+<%--<script type="text/javascript" src="styles/components/underscore/underscore-min.js"></script>--%>
+<%--<script type="text/javascript" src="styles/components/bootstrap2/js/bootstrap.min.js"></script>--%>
 
 <link rel="stylesheet" href="styles/components/bootstrap2/css/bootstrap.css">
 <link rel="stylesheet" href="styles/components/bootstrap2/css/bootstrap-responsive.css">
@@ -24,29 +24,29 @@
 
 <head>
     <title></title>
-    <%--<style>--%>
+    <style>
 
-    <%--*{--%>
-    <%--margin:0;--%>
-    <%--padding:0;--%>
-    <%--}--%>
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
-    <%--html{--%>
-    <%--/* This image will be displayed fullscreen */--%>
-    <%--background:url('img/VIAJAR.jpg') no-repeat center center;--%>
+        html {
+            /* This image will be displayed fullscreen */
+            background: url('img/VIAJAR.jpg') no-repeat center center;
 
-    <%--/* Ensure the html element always takes up the full height of the browser window */--%>
-    <%--min-height:100%;--%>
+            /* Ensure the html element always takes up the full height of the browser window */
+            min-height: 100%;
 
-    <%--/* The Magic */--%>
-    <%--background-size:cover;--%>
-    <%--}--%>
+            /* The Magic */
+            background-size: cover;
+        }
 
-    <%--body{--%>
-    <%--/* Workaround for some mobile browsers */--%>
-    <%--min-height:100%;--%>
-    <%--}--%>
-    <%--</style>--%>
+        body {
+            /* Workaround for some mobile browsers */
+            min-height: 100%;
+        }
+    </style>
 
 </head>
 <body>

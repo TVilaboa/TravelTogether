@@ -55,6 +55,10 @@
         <servlet-name>sendMessage</servlet-name>
         <servlet-class>servlets.SendMessage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>welcome</servlet-name>
+        <servlet-class>servlets.Welcome</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -76,6 +80,10 @@
     <servlet-mapping>
         <servlet-name>sendMessage</servlet-name>
         <url-pattern>/Secure/calendar/sendMessage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>welcome</servlet-name>
+        <url-pattern>/Secure/welcome</url-pattern>
     </servlet-mapping>
 
 

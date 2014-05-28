@@ -19,7 +19,7 @@ public class LoginRealm extends SimpleSecurityRealmBase {
 
     /**
      * Trivial implementation of the SecurityRealmInterface.
-     * <p/>
+     * <p>
      * There is one model: username is 'username', password is 'password'
      * And this model is in one role: 'inthisrole'
      *
@@ -33,7 +33,7 @@ public class LoginRealm extends SimpleSecurityRealmBase {
 
     /**
      * Authenticate a user.
-     * <p/>
+     * <p>
      * Implement this method in a subclass to avoid dealing with Principal objects.
      *
      * @param username a username
@@ -55,7 +55,7 @@ public class LoginRealm extends SimpleSecurityRealmBase {
 
 
         if (dbuser.getPass().equals(password)) {
-            JOptionPane.showMessageDialog(null, "login ok");
+
 
             return true;
         }
@@ -66,7 +66,7 @@ public class LoginRealm extends SimpleSecurityRealmBase {
 
     /**
      * Test for role membership.
-     * <p/>
+     * <p>
      * Implement this method in a subclass to avoid dealing with Principal objects.
      *
      * @param username The name of the user
@@ -88,7 +88,7 @@ public class LoginRealm extends SimpleSecurityRealmBase {
 
     /**
      * Setter for exampleProperty to deomonstrate setting realm properties from config file.
-     * <p/>
+     * <p>
      * This has no effect other than printing a message when the property is set.
      *
      * @param value example property value

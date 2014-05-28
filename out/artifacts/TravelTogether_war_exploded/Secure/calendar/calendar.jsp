@@ -1,3 +1,6 @@
+<jsp:useBean id="userSession" scope="request" class="java.lang.String"/>
+<jsp:useBean id="userCalendar" scope="request" class="java.lang.String"/>
+
 <%--
   Created by IntelliJ IDEA.
   User: Toto
@@ -15,9 +18,9 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
-    <link rel="stylesheet" type="text/css" href="Jquery-DatePicker/jquery.datepick.css">
-    <script type="text/javascript" src="Jquery-DatePicker/jquery.plugin.js"></script>
-    <script type="text/javascript" src="Jquery-DatePicker/jquery.datepick.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Secure/calendar/Jquery-DatePicker/jquery.datepick.css">
+    <script type="text/javascript" src="/Secure/calendar/Jquery-DatePicker/jquery.plugin.js"></script>
+    <script type="text/javascript" src="/Secure/calendar/Jquery-DatePicker/jquery.datepick.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
 
@@ -26,24 +29,13 @@
     <meta name="description"
           content="Full view calendar component for twitter bootstrap with year, month, week, day views.">
     <meta name="keywords" content="jQuery,Bootstrap,Calendar,HTML,CSS,JavaScript,responsive,month,week,year,day">
-    <meta name="author" content="Serhioromano">
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="components/bootstrap2/css/bootstrap.css">
-    <link rel="stylesheet" href="components/bootstrap2/css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="/Secure/calendar/components/bootstrap2/css/bootstrap.css">
+    <link rel="stylesheet" href="/Secure/calendar/components/bootstrap2/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="/Secure/calendar/css/calendar.css">
 
-    <style type="text/css">
-        .btn-twitter {
-            padding-left: 30px;
-            background: rgba(0, 0, 0, 0) url(https://platform.twitter.com/widgets/images/btn.27237bab4db188ca749164efd38861b0.png) -20px 6px no-repeat;
-            background-position: -20px 11px !important;
-        }
 
-        .btn-twitter:hover {
-            background-position: -20px -18px !important;
-        }
-    </style>
 </head>
 <body>
 <div class="container">
@@ -135,6 +127,7 @@
 
             <%
                 out.print(request.getAttribute("matchingUsers"));
+
             %>
         </table>
 
@@ -149,36 +142,61 @@
             <div class="modal-body">
                 <form id="addEventForm" action="addEvent" method="POST" class="form-horizontal"
                       role="form">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Title</label>
+                    <table>
+                        <div class="form-group">
 
-                        <div class="col-sm-10">
-                            <input class="form-control" id="Title" name="Title" type="text"
+                            <tr>
+                                <td>
+                                    <label class="col-sm-2 control-label">Title</label>
+                                </td>
+                                <td>
+                                    <div class="col-sm-10">
+                                    <input class="form-control" id="Title" name="Title" type="text"
                                    value="Your title,hotel,etc">
-                        </div>
-                        <label class="col-sm-2 control-label">URL</label>
 
-                        <div class="col-sm-10">
-                            <input class="form-control" id="URL" name="URL" type="text"
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="col-sm-2 control-label">URL</label>
+                                </td>
+                                <td>
+                                    <div class="col-sm-10">
+                                    <input class="form-control" id="URL" name="URL" type="text"
                                    value="http://www.example.com/">
                         </div>
-                        <label class="col-sm-2 control-label">From:</label>
-
-                        <div class="col-sm-10">
-                            <input class="form-control" id="From" name="From" type="text"
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="col-sm-2 control-label">From:</label>
+                                </td>
+                                <td>
+                                    <div class="col-sm-10">
+                                    <input class="form-control" id="From" name="From" type="text"
                                    value="Where are you now">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">
-                            To:
-                        </label>
+                                </td>
+                            </tr>
 
-                        <div class="col-sm-10">
-                            <input class="form-control" id="To" name="To" type="text"
+                        </div>
+                        <div class="form-group">
+                            <tr>
+                                <td>
+                                    <label class="col-sm-2 control-label">
+                                    To:
+                        </label>
+                                </td>
+                                <td>
+                                    <div class="col-sm-10">
+                                    <input class="form-control" id="To" name="To" type="text"
                                    placeholder="Where are you traveling" disabled>
                         </div>
-                    </div>
+                                </td>
+                            </tr>
+                        </div>
+                    </table>
                     <div class="clearfix">
                         <label>Date range</label>
 
@@ -221,7 +239,6 @@
         </div>
 
 
-
         <%--Inbox Modal--%>
 
         <div id="myMessageModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -236,12 +253,15 @@
                     <div class="form-group">
 
 
-                          <div>
+                        <div>
 
-                              <textarea class="form-control" id="Message" name="Message"
-                                      >Hi, we share some events!!....</textarea>
+                            <textarea class="form-control" id="Message" name="Message"
+                                    >Hi, we share some events!!....</textarea>
                         </div>
+                        <div>
+                            <input type="hidden" name="destinatary" id="destinatary" value=""/>
                         </div>
+                    </div>
 
                     <div class="modal-footer">
 
@@ -285,9 +305,9 @@
 </div>
 
 
-<script type="text/javascript" src="components/underscore/underscore-min.js"></script>
-<script type="text/javascript" src="components/bootstrap2/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="components/jstimezonedetect/jstz.min.js"></script>
+<script type="text/javascript" src="/Secure/calendar/components/underscore/underscore-min.js"></script>
+<script type="text/javascript" src="/Secure/calendar/components/bootstrap2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/Secure/calendar/components/jstimezonedetect/jstz.min.js"></script>
 <script type="text/javascript" src="js/language/nl-NL.js"></script>
 <script type="text/javascript" src="js/language/fr-FR.js"></script>
 <script type="text/javascript" src="js/language/de-DE.js"></script>
@@ -311,6 +331,13 @@
     });
 
 </script>
+<script type="text/javascript">
+    $(document).on("click", ".open-sendMessageModal", function () {
+        var destinatary = $(this).data('id');
+        document.getElementById("destinatary").value = destinatary;
+
+    });
+</script>
 
 
 <!--<script type="text/javascript">-->
@@ -325,7 +352,7 @@
     $(document).ready(function () {
         $("input#submit").click(function () {
             //Serialize the form and post it to the server
-            $.post("/Secure/calendar/addEvent", $('#sendMessageForm').serialize(), function () {
+            $.post("/Secure/calendar/addEvent", $('#addEventForm').serialize(), function () {
 
                 // When this executes, we know the form was submitted
 
@@ -352,7 +379,7 @@
     $(document).ready(function () {
         $("input#send").click(function () {
             //Serialize the form and post it to the server
-            $.post("/Secure/calendar/SendMessage", $('#addEventForm').serialize(), function () {
+            $.post("/Secure/calendar/SendMessage", $('#sendMessageForm').serialize(), function () {
 
                 // When this executes, we know the form was submitted
 
@@ -384,15 +411,22 @@
         return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
     $(document).ready(function () {
-        var userCalendar = getParameterByName("userCalendar");
-        var userSession = getParameterByName("userSession");
+        var userCalendar = "${userCalendar}";
+        var userSession = "${userSession}";
+
+
+
         if (userCalendar.localeCompare(userSession) == 0) {
 
         } else {
             document.getElementById("addEventModal").disabled = true;
+            document.getElementById("send").disabled = true;
+
+
         }
 
-    })
+    });
+
 </script>
 
 </div>

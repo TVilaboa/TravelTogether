@@ -258,6 +258,9 @@
                             <textarea class="form-control" id="Message" name="Message"
                                     >Hi, we share some events!!....</textarea>
                         </div>
+                        <div>
+                            <input type="hidden" name="destinatary" id="destinatary" value=""/>
+                        </div>
                     </div>
 
                     <div class="modal-footer">
@@ -328,6 +331,13 @@
     });
 
 </script>
+<script type="text/javascript">
+    $(document).on("click", ".open-sendMessageModal", function () {
+        var destinatary = $(this).data('id');
+        document.getElementById("destinatary").value = destinatary;
+
+    });
+</script>
 
 
 <!--<script type="text/javascript">-->
@@ -342,7 +352,7 @@
     $(document).ready(function () {
         $("input#submit").click(function () {
             //Serialize the form and post it to the server
-            $.post("/Secure/calendar/addEvent", $('#sendMessageForm').serialize(), function () {
+            $.post("/Secure/calendar/addEvent", $('#addEventForm').serialize(), function () {
 
                 // When this executes, we know the form was submitted
 
@@ -369,7 +379,7 @@
     $(document).ready(function () {
         $("input#send").click(function () {
             //Serialize the form and post it to the server
-            $.post("/Secure/calendar/SendMessage", $('#addEventForm').serialize(), function () {
+            $.post("/Secure/calendar/SendMessage", $('#sendMessageForm').serialize(), function () {
 
                 // When this executes, we know the form was submitted
 
