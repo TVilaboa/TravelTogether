@@ -56,7 +56,8 @@ public class Calendar extends HttpServlet {
         for (String s : getMatchingUsers(dbuser.getId()))
             matchs += ("<tr><td>" + s + "</td></tr>");
         req.setAttribute("matchingUsers", matchs);
-
+        req.setAttribute("userCalendar", dbuser.getUser());
+        req.setAttribute("userSession", username);
         rd.forward(req, resp);
 
 
@@ -95,7 +96,8 @@ public class Calendar extends HttpServlet {
         for (String s : getMatchingUsers(dbuser.getId()))
             matchs += ("<tr><td>" + s + "</td></tr>");
         req.setAttribute("matchingUsers", matchs);
-
+        req.setAttribute("userCalendar", dbuser.getUser());
+        req.setAttribute("userSession", username);
         rd.forward(req, resp);
 
     }

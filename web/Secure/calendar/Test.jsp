@@ -18,9 +18,12 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
-    <link rel="stylesheet" type="text/css" href="/Secure/calendar/Jquery-DatePicker/jquery.datepick.css">
-    <script type="text/javascript" src="/Secure/calendar/Jquery-DatePicker/jquery.plugin.js"></script>
-    <script type="text/javascript" src="/Secure/calendar/Jquery-DatePicker/jquery.datepick.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/Secure/calendar/Jquery-DatePicker/jquery.datepick.css">
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/Secure/calendar/Jquery-DatePicker/jquery.plugin.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/Secure/calendar/Jquery-DatePicker/jquery.datepick.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
 
@@ -31,9 +34,11 @@
     <meta name="keywords" content="jQuery,Bootstrap,Calendar,HTML,CSS,JavaScript,responsive,month,week,year,day">
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="/Secure/calendar/components/bootstrap2/css/bootstrap.css">
-    <link rel="stylesheet" href="/Secure/calendar/components/bootstrap2/css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="/Secure/calendar/css/calendar.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/Secure/calendar/components/bootstrap2/css/bootstrap.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/Secure/calendar/components/bootstrap2/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Secure/calendar/css/calendar.css">
 
 
 </head>
@@ -44,7 +49,7 @@
 
     <p>Bootstrap based itinerary.</p>
 
-    <a class="btn btn-inverse" href="/Secure/welcome.jsp">Back</a>
+    <a class="btn btn-inverse" href="${pageContext.request.contextPath}/Secure/welcome.jsp">Back</a>
     <a class="btn" href="Profile">User Profile</a>
 
     <script>!function (d, s, id) {
@@ -151,8 +156,8 @@
                                 </td>
                                 <td>
                                     <div class="col-sm-10">
-                                    <input class="form-control" id="Title" name="Title" type="text"
-                                   value="Your title,hotel,etc">
+                                        <input class="form-control" id="Title" name="Title" type="text"
+                                               value="Your title,hotel,etc">
 
                                     </div>
                                 </td>
@@ -163,9 +168,9 @@
                                 </td>
                                 <td>
                                     <div class="col-sm-10">
-                                    <input class="form-control" id="URL" name="URL" type="text"
-                                   value="http://www.example.com/">
-                        </div>
+                                        <input class="form-control" id="URL" name="URL" type="text"
+                                               value="http://www.example.com/">
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -174,9 +179,9 @@
                                 </td>
                                 <td>
                                     <div class="col-sm-10">
-                                    <input class="form-control" id="From" name="From" type="text"
-                                   value="Where are you now">
-                        </div>
+                                        <input class="form-control" id="From" name="From" type="text"
+                                               value="Where are you now">
+                                    </div>
                                 </td>
                             </tr>
 
@@ -185,14 +190,14 @@
                             <tr>
                                 <td>
                                     <label class="col-sm-2 control-label">
-                                    To:
-                        </label>
+                                        To:
+                                    </label>
                                 </td>
                                 <td>
                                     <div class="col-sm-10">
-                                    <input class="form-control" id="To" name="To" type="text"
-                                   placeholder="Where are you traveling" disabled>
-                        </div>
+                                        <input class="form-control" id="To" name="To" type="text"
+                                               placeholder="Where are you traveling" disabled>
+                                    </div>
                                 </td>
                             </tr>
                         </div>
@@ -403,7 +408,6 @@
     $(document).ready(function () {
         var userCalendar = "${userCalendar}";
         var userSession = "${userSession}";
-
 
 
         if (userCalendar.localeCompare(userSession) == 0) {
