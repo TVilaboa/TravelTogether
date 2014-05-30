@@ -133,4 +133,18 @@ public class EventsEntity {
     public void setUser(UsersEntity user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("EventsEntity{");
+        sb.append("id=").append(id);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", url='").append(url).append('\'');
+        sb.append(", clazz='").append(clazz).append('\'');
+        sb.append(", start=").append(start);
+        sb.append(", end=").append(end);
+        sb.append(", user=").append(user);
+        sb.append('}');
+        return sb.toString();
+    }
 }

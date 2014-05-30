@@ -8,7 +8,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.securityfilter.realm.SimplePrincipal;
+import security.Constants;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +24,9 @@ import javax.swing.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -77,8 +87,92 @@ public class AddEvent extends HttpServlet {
         } finally {
             session.close();
         }
+        String body = "<html>" + dbuser.getUser() + " has created a event " + e.toString() + " that matchs with one of your events!!"
+                + "<a href=\"" + Constants.WEB_ADDRESS + "\" target=\"_blanck\" > TravelTogether </a></html>";
 
+        List<String> matchingUsersMail = getMatchingUsersMail(dbuser.getId(), e);
+        if (matchingUsersMail.size() > 0)
+            sendFromGMail(matchingUsersMail.toArray(new String[matchingUsersMail.size()]), "New matching events!!", body);
         resp.sendRedirect("calendar?user=" + dbuser.getUser());
+    }
+
+    private List<String> getMatchingUsersMail(int id, EventsEntity userEvent) {
+
+
+        List<String> mails = new ArrayList<>();
+
+        try {
+            Session hibernateSession = Main.getSession();
+            String hql = "FROM UsersEntity U";
+            Query query = hibernateSession.createQuery(hql);
+            List<UsersEntity> allUsers = (List<UsersEntity>) query.list();
+            for (UsersEntity user : allUsers) {
+                if (user.getId() != id) {
+                    for (EventsEntity event : user.getEvents()) {
+
+                        if (userEvent.getStart() - event.getStart() < 86400000 &&
+                                userEvent.getStart() - event.getStart() > -86400000) {
+
+                            if (userEvent.getTitle().split("\\.")[0].equals(event.getTitle().split("\\.")[0])) {
+
+                                mails.add(user.getEmail());
+                                break; //dont want to send multiple mails to each user for each event they share
+                            }
+
+
+                        }
+
+
+                    }
+                }
+            }
+
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return mails;
+
+    }
+
+
+    private void sendFromGMail(String[] to, String subject, String body) {
+        Properties props = System.getProperties();
+        String host = "smtp.gmail.com";
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.user", Constants.SYSTEM_ADDRESS);
+        props.put("mail.smtp.password", Constants.MAIL_PASS);
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+
+        javax.mail.Session session = javax.mail.Session.getDefaultInstance(props);
+        MimeMessage message = new MimeMessage(session);
+
+        try {
+            message.setFrom(new InternetAddress(Constants.SYSTEM_ADDRESS));
+            InternetAddress[] toAddress = new InternetAddress[to.length];
+
+            // To get the array of addresses
+            for (int i = 0; i < to.length; i++) {
+                toAddress[i] = new InternetAddress(to[i]);
+            }
+
+            for (InternetAddress toAddres : toAddress) {
+                message.addRecipient(Message.RecipientType.TO, toAddres);
+            }
+
+            message.setSubject(subject);
+            message.setContent(body, "text/html");
+            Transport transport = session.getTransport("smtp");
+            transport.connect(host, Constants.SYSTEM_ADDRESS, Constants.MAIL_PASS);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+        } catch (AddressException ae) {
+            ae.printStackTrace();
+        } catch (MessagingException me) {
+            me.printStackTrace();
+        }
     }
 
 

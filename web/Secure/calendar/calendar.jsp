@@ -44,7 +44,7 @@
 
     <p>Bootstrap based itinerary.</p>
 
-    <a class="btn btn-inverse" href="/Secure/welcome.jsp">Back</a>
+    <a class="btn btn-inverse" onclick="window.history.back()">Back</a>
     <a class="btn" href="Profile">User Profile</a>
 
     <script>!function (d, s, id) {
@@ -115,6 +115,8 @@
         <h4>Events</h4>
         <small>Events</small>
         <ul id="eventlist" class="nav nav-list"></ul>
+
+        //TODO put in container with scrollbar. Same with matching users
 
         <!-- Button to trigger modal -->
         <a href="#myModal" role="button" class="btn" data-toggle="modal" id="addEventModal">Add event</a>

@@ -8,13 +8,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns="http://www.w3.org/1999/html">
-<%--<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">--%>
-<%--<script src="http://code.jquery.com/jquery-1.9.0.js"></script>--%>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
 
-<%--<script type="text/javascript" src="styles/components/underscore/underscore-min.js"></script>--%>
-<%--<script type="text/javascript" src="styles/components/bootstrap2/js/bootstrap.min.js"></script>--%>
+<script type="text/javascript" src="styles/components/underscore/underscore-min.js"></script>
+<script type="text/javascript" src="styles/components/bootstrap2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="styles/components/bootstrap2/css/bootstrap.css">
+<link rel="stylesheet" href="styles/components/bootstrap2/css/bootstrapLogin.css">
 <link rel="stylesheet" href="styles/components/bootstrap2/css/bootstrap-responsive.css">
 <link rel="stylesheet" href="styles/css/calendar.css">
 
@@ -26,12 +26,8 @@
     <title></title>
     <style>
 
-        * {
-            margin: 0;
-            padding: 0;
-        }
 
-        html {
+        body {
             /* This image will be displayed fullscreen */
             background: url('img/VIAJAR.jpg') no-repeat center center;
 
@@ -42,10 +38,7 @@
             background-size: cover;
         }
 
-        body {
-            /* Workaround for some mobile browsers */
-            min-height: 100%;
-        }
+
     </style>
 
 </head>
@@ -78,7 +71,7 @@
                                 ></td>
                     </tr>
                 </table>
-                <input type="Submit" value="<%=Constants.LOG_IN%>"/>
+                <input class="btn" type="Submit" value="<%=Constants.LOG_IN%>"/>
             </form>
             You dont have an user? Register!!!
             <form id="<%=Constants.REGISTER_FORM_ID%>" action="register" method="POST">
@@ -102,7 +95,7 @@
                         <td><input name="Email"/></td>
                     </tr>
                 </table>
-                <input type="submit" value="<%=Constants.REGISTER%>"/>
+                <input class="btn" type="submit" value="<%=Constants.REGISTER%>"/>
             </form>
         </div>
 

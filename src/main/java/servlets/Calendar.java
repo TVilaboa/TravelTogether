@@ -78,7 +78,7 @@ public class Calendar extends HttpServlet {
             dbuser = (UsersEntity) query.uniqueResult();
             if (dbuser == null) {
                 JOptionPane.showMessageDialog(null, "Incorrect user");
-                resp.sendRedirect("/Secure/welcome.jsp");
+                resp.sendRedirect("/Secure/welcome");
                 return;
             }
             createCalendar(dbuser, req);
@@ -143,14 +143,14 @@ public class Calendar extends HttpServlet {
             String hql = "FROM UsersEntity U WHERE U.id = :userid";
             Query query = hibernateSession.createQuery(hql);
             query.setParameter("userid", id);
-            Set<EventsEntity> userEvents = ((UsersEntity) query.uniqueResult()).getEvents();
+            Set<EventsEntity> actualUserEvents = ((UsersEntity) query.uniqueResult()).getEvents();
             hql = "FROM UsersEntity U";
             query = hibernateSession.createQuery(hql);
             List<UsersEntity> allUsers = (List<UsersEntity>) query.list();
             for (UsersEntity user : allUsers) {
                 if (user.getId() != id) {
                     for (EventsEntity event : user.getEvents()) {
-                        for (EventsEntity userEvent : userEvents) {
+                        for (EventsEntity userEvent : actualUserEvents) {
                             if (userEvent.getStart() - event.getStart() < 86400000 &&
                                     userEvent.getStart() - event.getStart() > -86400000) {
 
