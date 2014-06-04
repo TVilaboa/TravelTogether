@@ -12,12 +12,15 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
 
-<script type="text/javascript" src="styles/components/underscore/underscore-min.js"></script>
-<script type="text/javascript" src="styles/components/bootstrap2/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/styles/components/underscore/underscore-min.js"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/styles/components/bootstrap2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="styles/components/bootstrap2/css/bootstrap.css">
-<link rel="stylesheet" href="styles/components/bootstrap2/css/bootstrap-responsive.css">
-<link rel="stylesheet" href="styles/css/calendar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/components/bootstrap2/css/bootstrap.css">
+<link rel="stylesheet"
+      href="${pageContext.request.contextPath}/styles/components/bootstrap2/css/bootstrap-responsive.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/css/calendar.css">
 
 
 <script type="text/javascript" src="http://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>

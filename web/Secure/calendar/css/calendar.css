@@ -9,6 +9,16 @@
     *zoom: 1;
 }
 
+.table-wrapper {
+    position: relative;
+}
+
+.table-scroll {
+    height: 150px;
+    overflow: auto;
+    margin-top: 20px;
+}
+
 .cal-row-fluid:before,
 .cal-row-fluid:after {
     display: table;

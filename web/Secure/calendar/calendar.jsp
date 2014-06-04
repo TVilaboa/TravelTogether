@@ -14,7 +14,7 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
 
-
+    //TODO header global con checkbox para habilitar / des envio de mails
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
@@ -114,7 +114,12 @@
 
         <h4>Events</h4>
         <small>Events</small>
-        <ul id="eventlist" class="nav nav-list"></ul>
+        <div class="table-wrapper">
+            <div class="table-scroll">
+            <ul id="eventlist" class="nav nav-list"></ul>
+            </div>
+        </div>
+
 
         //TODO put in container with scrollbar. Same with matching users
 
@@ -124,14 +129,19 @@
 
         <!-- jsp to print matching users-->
 
-        <p>Matching users</p>
-        <table>
+        <h4>Matching users</h4>
+
+        <div class="table-wrapper">
+            <div class="table-scroll">
+            <table>
 
             <%
                 out.print(request.getAttribute("matchingUsers"));
 
             %>
         </table>
+            </div>
+        </div>
 
 
         <!-- Modal -->

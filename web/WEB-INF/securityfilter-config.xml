@@ -22,7 +22,7 @@
         <form-login-config>
             <form-login-page>/login.jsp</form-login-page>
             <form-error-page>/loginError.jsp</form-error-page>
-            <form-default-page>/index.jsp</form-default-page>
+            <form-default-page>/Secure/welcome</form-default-page>
 
         </form-login-config>
     </login-config>

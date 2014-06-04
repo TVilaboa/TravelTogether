@@ -24,10 +24,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -91,8 +88,10 @@ public class AddEvent extends HttpServlet {
                 + "<a href=\"" + Constants.WEB_ADDRESS + "\" target=\"_blanck\" > TravelTogether </a></html>";
 
         List<String> matchingUsersMail = getMatchingUsersMail(dbuser.getId(), e);
-        if (matchingUsersMail.size() > 0)
-            sendFromGMail(matchingUsersMail.toArray(new String[matchingUsersMail.size()]), "New matching events!!", body);
+        for (String userMail : matchingUsersMail) {
+            sendFromGMail(new String[]{userMail}, "New matching events!!", body);
+        }
+
         resp.sendRedirect("calendar?user=" + dbuser.getUser());
     }
 
@@ -170,6 +169,12 @@ public class AddEvent extends HttpServlet {
             transport.close();
         } catch (AddressException ae) {
             ae.printStackTrace();
+            try {
+                System.out.println(Arrays.toString(message.getAllRecipients()));
+            } catch (MessagingException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e);
+            }
         } catch (MessagingException me) {
             me.printStackTrace();
         }
