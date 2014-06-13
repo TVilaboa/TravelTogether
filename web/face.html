@@ -14,11 +14,6 @@
     var fbAppId = '1418734481740966';
     var objectToLike = 'http://techcrunch.com/2013/02/06/facebook-launches-developers-live-video-channel-to-keep-its-developer-ecosystem-up-to-date/';
 
-    // This check is just here to make sure you set your app ID. You don't
-    // need to use it in production.
-    if (fbAppId === 'replace me') {
-        alert('Please set the fbAppId in the sample.');
-    }
 
     /*
      * This is boilerplate code that is used to initialize
@@ -77,6 +72,40 @@
      *   https://developers.facebook.com/docs/reference/api/privacy-parameter
      */
 
+    function create() {
+        FB.api(
+                'me/traveltogetheronline:create',
+                'post',
+                {
+                    event: {
+                        app_id: 1418734481740966,
+                        type: "traveltogetheronline:event",
+                        url: "http://localhost:8080/Secure/calendar/calendar?user=toto",
+                        title: "sasd",
+                        image: "http://erasmussinmaletas.com/wp-content/uploads/2013/03/destinos-viajes.jpg",
+                        description: "Sample event description"
+                    },
+                    privacy: {'value': 'SELF'}
+                }
+
+                ,
+                function (response) {
+                    if (!response) {
+                        alert('Error occurred.');
+                    } else if (response.error) {
+                        document.getElementById('result').innerHTML =
+                                'Error: ' + response.error.message;
+                    } else {
+                        document.getElementById('result').innerHTML =
+                                '<a href=\"https://www.facebook.com/me/activity/' +
+                                response.id + '\">' +
+                                'Story created.  ID is ' +
+                                response.id + '</a>';
+                    }
+                }
+        );
+    }
+
     function postLike() {
         FB.api(
                 'https://graph.facebook.com/me/og.likes',
@@ -120,20 +149,14 @@
 </div>
 
 <div>
-    This example creates a story on Facebook using the
-    <a href="https://developers.facebook.com/docs/reference/ogaction/og.likes">
-        <code>og.likes</code></a> API. That story will just say
-    that you like an
-    <a href="http://techcrunch.com/2013/02/06/facebook-launches-developers-live-video-channel-to-keep-its-developer-ecosystem-up-to-date/">
-        article on TechCrunch</a>. The story should only
-    be visible to you.
+    This creates a story on Facebook using the event.Should only be visible to you.
 </div>
 
 <div>
     <input
             type="button"
             value="Create a story with an og.likes action"
-            onclick="postLike();">
+            onclick="create();">
 </div>
 
 <div id="result"></div>

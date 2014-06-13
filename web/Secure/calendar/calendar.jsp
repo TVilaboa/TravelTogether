@@ -22,7 +22,7 @@
     <script type="text/javascript" src="/Secure/calendar/Jquery-DatePicker/jquery.plugin.js"></script>
     <script type="text/javascript" src="/Secure/calendar/Jquery-DatePicker/jquery.datepick.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
-
+    <scrip type="text/javascript" src="/Secure/calendar/js/Face.js"></scrip>
 
     <title>Itinerary</title>
 
@@ -46,6 +46,14 @@
 
     <a class="btn btn-inverse" onclick="window.history.back()">Back</a>
     <a class="btn" href="Profile">User Profile</a>
+
+    <div
+            class="fb-login-button"
+            data-show-faces="true"
+            data-width="200"
+            data-max-rows="1"
+            data-scope="publish_actions">
+    </div>
 
     <script>!function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
@@ -288,7 +296,9 @@
 
     </div>
 </div>
-
+<div class="clearfix">
+    <div id="result"></div>
+</div>
 <!--<div class="clearfix"></div>-->
 <!--<br><br>-->
 <!--<a href="https://github.com/Serhioromano/bootstrap-calendar/issues" class="btn btn-block btn-info">-->
@@ -361,8 +371,10 @@
 <!--})();-->
 <!--</script>-->
 <script type="text/javascript">
+
     $(document).ready(function () {
         $("input#submit").click(function () {
+            window.open('http://localhost:8080/face.html');
             //Serialize the form and post it to the server
             $.post("/Secure/calendar/addEvent", $('#addEventForm').serialize(), function () {
 
