@@ -32,10 +32,9 @@
 Welcome
 <form id="Calendar"
       action="${pageContext.request.contextPath}/Secure/calendar/calendar" method="POST">
-
+    <input type="text" id="userCalendar" name="userCalendar"> blank if you want to access own calendar
     <input type="submit">
 
-    //TODO add input to send user via get and see others itineraries
 
 </form>
 <table>

@@ -169,6 +169,7 @@ public class AddEvent extends HttpServlet {
             transport.close();
         } catch (AddressException ae) {
             ae.printStackTrace();
+            JOptionPane.showMessageDialog(null, "adress");
             try {
                 System.out.println(Arrays.toString(message.getAllRecipients()));
             } catch (MessagingException e) {
@@ -177,6 +178,7 @@ public class AddEvent extends HttpServlet {
             }
         } catch (MessagingException me) {
             me.printStackTrace();
+            JOptionPane.showMessageDialog(null, "messaging");
         }
     }
 

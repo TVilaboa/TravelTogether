@@ -41,7 +41,12 @@ public class Calendar extends HttpServlet {
             Session session = Main.getSession();
             String hql = "FROM UsersEntity U WHERE U.user = :username";
             Query query = session.createQuery(hql);
-            query.setParameter("username", username);
+            if (req.getParameter("userCalendar").equals("")) {
+                query.setParameter("username", username);
+            } else {
+                query.setParameter("username", req.getParameter("userCalendar"));
+            }
+
 
             dbuser = (UsersEntity) query.uniqueResult();
             createCalendar(dbuser, req);
@@ -50,7 +55,13 @@ public class Calendar extends HttpServlet {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         ServletContext sc = getServletContext();
-        RequestDispatcher rd = sc.getRequestDispatcher("/Secure/calendar/calendar.jsp?userCalendar=" + username + "&userSession=" + username);
+        RequestDispatcher rd;
+        if (req.getParameter("userCalendar").equals("")) {
+            rd = sc.getRequestDispatcher("/Secure/calendar/calendar.jsp?userCalendar=" + username + "&userSession=" + username);
+        } else {
+            rd = sc.getRequestDispatcher("/Secure/calendar/calendar.jsp?userCalendar=" + req.getParameter("userCalendar") + "&userSession=" + username);
+        }
+
 
         String matchs = "";
         for (String s : getMatchingUsers(dbuser.getId()))

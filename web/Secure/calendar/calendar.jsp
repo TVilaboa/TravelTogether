@@ -129,8 +129,6 @@
         </div>
 
 
-        //TODO put in container with scrollbar. Same with matching users
-
         <!-- Button to trigger modal -->
         <a href="#myModal" role="button" class="btn" data-toggle="modal" id="addEventModal">Add event</a>
 
@@ -250,7 +248,9 @@
                     <div class="modal-footer">
 
                         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                        <button type="submit" id="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" id="submit" class="btn btn-primary"
+                                onclick=popitup('http://localhost:8080/Secure/calendar/face.jsp');>Save Changes
+                        </button>
                     </div>
                 </form>
             </div>
@@ -372,29 +372,30 @@
 <!--</script>-->
 <script type="text/javascript">
 
-    $(document).ready(function () {
-        $("input#submit").click(function () {
-            window.open('http://localhost:8080/face.html');
-            //Serialize the form and post it to the server
-            $.post("/Secure/calendar/addEvent", $('#addEventForm').serialize(), function () {
+    function postEventForm() {
 
-                // When this executes, we know the form was submitted
+        //Serialize the form and post it to the server
+        $.post("/Secure/calendar/addEvent", $('#addEventForm').serialize(), function () {
 
-                // To give some time for the animation,
-                // let's add a delay of 200 ms before the redirect
-                var delay = 200;
-                setTimeout(function () {
-                    window.location.href = '/Secure/calendar/calendar.html';
-                }, delay);
+            // When this executes, we know the form was submitted
 
-                // Hide the modal
-                $("#my-modal").modal('hide');
+            // To give some time for the animation,
+            // let's add a delay of 200 ms before the redirect
+            var delay = 200;
+            setTimeout(function () {
+                window.location.href = '/Secure/calendar/calendar?user=' + "${userSession}";
+            }, delay);
+            // Hide the modal
+            $("#myModal").modal('hide');
 
-            });
-
-            // Stop the normal form submission
-            return false;
         });
+
+        // Stop the normal form submission
+        return false;
+    }
+
+    $(document).ready(function () {
+        $("input#submit").click();
 
     });
 </script>
@@ -411,7 +412,7 @@
                 // let's add a delay of 200 ms before the redirect
                 var delay = 200;
                 setTimeout(function () {
-                    window.location.href = '/Secure/calendar/calendar.html';
+                    window.location.href = '/Secure/calendar/calendar';
                 }, delay);
 
                 // Hide the modal
@@ -434,6 +435,19 @@
                 results = regex.exec(location.search);
         return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
+
+    function popitup(url) {
+        newwindow = window.open(url, 'TravelTogether Post');
+        newwindow.onbeforeunload = function () {
+
+            postEventForm();
+        };
+        if (window.focus) {
+            newwindow.focus()
+        }
+        return false;
+    }
+
     $(document).ready(function () {
         var userCalendar = "${userCalendar}";
         var userSession = "${userSession}";
