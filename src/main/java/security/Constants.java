@@ -6,7 +6,8 @@ public interface Constants {
     public static final String COMMON_TITLE_BASE = "TravelTogether";
     // home page constants
     public static final String HOME_TITLE = COMMON_TITLE_BASE + " Home";
-    public static final String VALID_USERNAME = "user@example.com";
+    public static final String VALID_USERNAME = "user";
+    public static final String VALID_EMAIL = "user@example.com";
     public static final String VALID_PASSWORD = "password";
     public static final String LOGIN_FORM_ID = "loginForm";
     public static final String REGISTER_FORM_ID = "registerForm";

@@ -29,19 +29,23 @@
     <title></title>
 </head>
 <body>
-Welcome
-<form id="Calendar"
-      action="${pageContext.request.contextPath}/Secure/calendar/calendar" method="POST">
-    <input type="text" id="userCalendar" name="userCalendar"> blank if you want to access own calendar
-    <input type="submit">
+<div class="container">
+    Welcome
+    <form id="Calendar"
+          action="${pageContext.request.contextPath}/Secure/calendar/calendar" method="POST">
+        <input type="text" id="userCalendar" name="userCalendar"> blank if you want to access own calendar
+        <input type="submit">
 
 
-</form>
-<table>
-    <%
-        out.print(request.getAttribute("userMessages"));
+    </form>
+    <table border="1">
+        <%
+            out.print(request.getAttribute("userMessages"));
 
-    %>
-</table>
+        %>
+    </table>
+</div>
+
+
 </body>
 </html>

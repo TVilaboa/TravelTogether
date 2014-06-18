@@ -42,29 +42,14 @@
 <div class="hero-unit">
     <h1>Itinerary</h1>
 
-    <p>Bootstrap based itinerary.</p>
+    <p><%out.println("Logged as " + userSession + "\n");%></p>
+
+    <p><% out.println("You are seeing " + userCalendar + "'s calendar");%></p>
 
     <a class="btn btn-inverse" onclick="window.history.back()">Back</a>
     <a class="btn" href="Profile">User Profile</a>
 
-    <div
-            class="fb-login-button"
-            data-show-faces="true"
-            data-width="200"
-            data-max-rows="1"
-            data-scope="publish_actions">
-    </div>
 
-    <script>!function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-        if (!d.getElementById(id)) {
-            js = d.createElement(s);
-            js.id = id;
-            js.src = p + '://platform.twitter.com/widgets.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }
-    }(document, 'script', 'twitter-wjs');
-    </script>
 </div>
 
 <div class="page-header">

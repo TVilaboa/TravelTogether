@@ -92,7 +92,7 @@
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td><input name="Email"/></td>
+                        <td><input type="text" name="Email" value="<%=Constants.VALID_EMAIL%>"/></td>
                     </tr>
                 </table>
                 <input class="btn" type="submit" value="<%=Constants.REGISTER%>"/>
