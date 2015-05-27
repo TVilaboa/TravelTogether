@@ -108,9 +108,7 @@ function create() {
 //                    response.id + '</a>';
                     document.getElementById('result').innerHTML =
                         '<a href=\"https://www.facebook.com/me/activity/' +
-                        response.id + '\">' +
-                        'Story created.  ID is ' +
-                        response.id + '</a>';
+                        response.id + '\">' + 'Click' +  '</a>';
 
 
             }
@@ -136,8 +134,7 @@ function postLike() {
                 document.getElementById('result').innerHTML =
                     '<a href=\"https://www.facebook.com/me/activity/' +
                     response.id + '\">' +
-                    'Story created.  ID is ' +
-                    response.id + '</a>';
+                   'Click' + '</a>';
             }
         }
     );

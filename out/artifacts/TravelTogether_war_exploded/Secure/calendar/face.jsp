@@ -8,22 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns="http://www.w3.org/1999/html">
-<style>
 
-
-    body {
-        /* This image will be displayed fullscreen */
-        background: url('../../../img/VIAJAR.jpg') no-repeat center center;
-
-        /* Ensure the html element always takes up the full height of the browser window */
-        min-height: 100%;
-
-        /* The Magic */
-        background-size: cover;
-    }
-
-
-</style>
 <link rel="stylesheet" href="/Secure/calendar/components/bootstrap3/css/bootstrap.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/css/calendar.css">
 <head>

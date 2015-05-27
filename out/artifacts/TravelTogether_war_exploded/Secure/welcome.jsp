@@ -13,22 +13,7 @@
 <html xmlns="http://www.w3.org/1999/html">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
-<style>
 
-
-    body {
-        /* This image will be displayed fullscreen */
-        background: url('../../img/VIAJAR.jpg') no-repeat center center;
-
-        /* Ensure the html element always takes up the full height of the browser window */
-        min-height: 100%;
-
-        /* The Magic */
-        background-size: cover;
-    }
-
-
-</style>
 <script type="text/javascript"
         src="${pageContext.request.contextPath}/styles/components/underscore/underscore-min.js"></script>
 
