@@ -8,6 +8,8 @@
         tmpl_path: 'tmpls/',
         tmpl_cache: false,
         day: 'now',
+        modal: "#events-modal",
+        modal_title : function (e) { return e.title },
         onAfterEventsLoad: function (events) {
             if (!events) {
                 return;

@@ -1,6 +1,7 @@
 package hibernate;
 
 import javax.persistence.*;
+import java.util.DoubleSummaryStatistics;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,6 +19,29 @@ public class EventsEntity {
     private String clazz;
     private Long start;
     private Long end;
+     private Float x;
+    private Float y;
+
+    @Basic
+    @Column(name = "X", nullable = true, insertable = true, updatable = true, length = 100)
+    public Float getX() {
+        return x;
+    }
+
+    public void setX(Float x) {
+        this.x = x;
+    }
+
+
+    @Basic
+    @Column(name = "Y", nullable = true, insertable = true, updatable = true, length = 100)
+    public Float getY() {
+        return y;
+    }
+
+    public void setY(Float y) {
+        this.y = y;
+    }
 
     private UsersEntity user;
 

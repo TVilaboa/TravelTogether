@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -30,24 +31,33 @@ public class SendMessage extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Transaction tx = null;
         Session session = Main.getSession();
-        UsersEntity dbuser = null;
+        UsersEntity receiver = null;
+        UsersEntity sender = null;
         try {
 
             MessageEntity m = new MessageEntity();
+            m.setDate(new Date());
+
             m.setText(req.getParameter("Message"));
             System.out.println(req.getParameter("destinatary"));
             tx = session.beginTransaction();
             String hql = "FROM UsersEntity U WHERE U.user = :username";
             Query query = session.createQuery(hql);
             query.setParameter("username", req.getParameter("destinatary"));
-            dbuser = (UsersEntity) query.uniqueResult();
-            m.setSender(((SimplePrincipal) req.getSession().getAttribute("org.securityfilter.filter.SecurityRequestWrapper.PRINCIPAL")).getName());
-            Set<MessageEntity> messages = dbuser.getMessages();
-            m.setUser(dbuser);
+            receiver = (UsersEntity) query.uniqueResult();
+            String senderName = ((SimplePrincipal) req.getSession().getAttribute("org.securityfilter.filter.SecurityRequestWrapper.PRINCIPAL")).getName();
+            m.setSender(senderName);
+            String hql1 = "FROM UsersEntity U WHERE U.user = :username";
+            Query query1 = session.createQuery(hql1);
+            query1.setParameter("username",senderName );
+            sender = (UsersEntity) query1.uniqueResult();
+            m.setSenderEmail(sender.getEmail());
+            Set<MessageEntity> messages = receiver.getMessages();
+            m.setUser(receiver);
             messages.add(m);
-            dbuser.setMessages(messages);
+            receiver.setMessages(messages);
             session.save(m);
-            session.save(dbuser);
+            session.save(receiver);
             tx.commit();
         } catch (HibernateException ez) {
             if (tx != null) tx.rollback();

@@ -1,3 +1,5 @@
+
+<jsp:useBean id="userSession" scope="request" class="java.lang.String"/>
 <%--
   Created by IntelliJ IDEA.
   User: root
@@ -11,35 +13,90 @@
 <html xmlns="http://www.w3.org/1999/html">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
-
-<script type="text/javascript" src="styles/components/underscore/underscore-min.js"></script>
-<script type="text/javascript" src="styles/components/bootstrap2/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="styles/components/bootstrap2/css/bootstrap.css">
-<link rel="stylesheet" href="styles/components/bootstrap2/css/bootstrap-responsive.css">
-<link rel="stylesheet" href="styles/css/calendar.css">
+<style>
 
 
-<script type="text/javascript" src="http://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+    body {
+        /* This image will be displayed fullscreen */
+        background: url('../../img/VIAJAR.jpg') no-repeat center center;
+
+        /* Ensure the html element always takes up the full height of the browser window */
+        min-height: 100%;
+
+        /* The Magic */
+        background-size: cover;
+    }
+
+
+</style>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/styles/components/underscore/underscore-min.js"></script>
+
+
+
+<link rel="stylesheet" href="/Secure/calendar/components/bootstrap3/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/css/calendar.css">
+
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/styles/js/jquery-ui.js"></script>
 
 <head>
     <title></title>
 </head>
 <body>
-Welcome
-<form id="Calendar"
-      action="${pageContext.request.contextPath}/Secure/calendar/calendar" method="POST">
+<div class="container">
+    <div class="jumbotron">
+        <h1>Inbox</h1>
 
-    <input type="submit">
+        <p><%out.println("Logged as " + userSession + "\n");%></p>
 
-    //TODO add input to send user via get and see others itineraries
 
-</form>
-<table>
-    <%
-        out.print(request.getAttribute("userMessages"));
+        <a class="btn btn-default" onclick="window.history.back()">Back</a>
 
-    %>
-</table>
+        <a class="btn btn-default" href="/Secure/calendar/calendar">Itinerary</a>
+
+    </div>
+    <form id="Calendar"
+          action="${pageContext.request.contextPath}/Secure/calendar/calendar" method="POST">
+        <input type="text" id="userCalendar" name="userCalendar"> Blank if you want to access own calendar
+        <input type="submit" value="See Calendar">
+
+
+    </form>
+
+        <%
+            out.print(request.getAttribute("userMessages"));
+
+        %>
+
+</div>
+
+
 </body>
+<script type="text/javascript">
+
+
+    jQuery("#userCalendar").autocomplete({
+        source: function (request, response) {
+            jQuery.get("users", {
+                query: request.term
+            }, function (data) {
+                var parsed = JSON.parse(data);
+                var newArray = new Array(parsed.length);
+                var i = 0;
+
+                parsed.forEach(function (entry) {
+                    var newObject = {
+                        label: entry
+                    };
+                    newArray[i] = newObject;
+                    i++;
+                });
+
+                response(newArray);
+
+            });
+        }
+    });
+</script>
 </html>

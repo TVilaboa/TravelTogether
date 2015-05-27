@@ -21,8 +21,8 @@
         <auth-method>FORM</auth-method>
         <form-login-config>
             <form-login-page>/login.jsp</form-login-page>
-            <form-error-page>/loginError.jsp</form-error-page>
-            <form-default-page>/Secure/welcome</form-default-page>
+            <form-error-page>/login.jsp</form-error-page>
+            <form-default-page>/Secure/calendar/calendar</form-default-page>
 
         </form-login-config>
     </login-config>

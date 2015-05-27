@@ -85,7 +85,9 @@ public class Calendar extends HttpServlet {
 
             String hql = "FROM UsersEntity U WHERE U.user = :username";
             Query query = session.createQuery(hql);
-            query.setParameter("username", user);
+            if(user == null)
+                query.setParameter("username", username);
+            else query.setParameter("username", user);
             dbuser = (UsersEntity) query.uniqueResult();
             if (dbuser == null) {
                 JOptionPane.showMessageDialog(null, "Incorrect user");

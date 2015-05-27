@@ -40,7 +40,7 @@ public class Welcome extends HttpServlet {
 
 
         req.setAttribute("userMessages", convertToTable(getUserMessages(((SimplePrincipal) req.getSession().getAttribute("org.securityfilter.filter.SecurityRequestWrapper.PRINCIPAL")).getName())));
-
+        req.setAttribute("userSession", ((SimplePrincipal) req.getSession().getAttribute("org.securityfilter.filter.SecurityRequestWrapper.PRINCIPAL")).getName());
         rd.forward(req, resp);
     }
 
@@ -50,9 +50,9 @@ public class Welcome extends HttpServlet {
     }
 
     private String convertToTable(List<String> messages) {
-        String table = "<tr><td>Sender</td><td>Message</td></tr>";
-        for (int i = 0; i < messages.size(); i = i + 2) {
-            table += "<tr><td>" + messages.get(i) + "</td><td>" + messages.get(i + 1) + "</td></tr>";
+        String table = "<div class=\"row\"><div class=\"col-md-3\">Sender</div><div class=\"col-md-3\">Message</div><div class=\"col-md-3\">Mail</div><div class=\"col-md-3\">Date</div></div>";
+        for (int i = 0; i < messages.size(); i = i + 4) {
+            table += "<div class=\"row\"><div class=\"col-md-3\">" + messages.get(i) + "</div><div class=\"col-md-3\">" + messages.get(i + 1) + "</div><div class=\"col-md-3\">" + messages.get(i+2) + "</div><div class=\"col-md-3\">" + messages.get(i+3)  + "</div></div>";
         }
         return table;
     }
@@ -72,6 +72,8 @@ public class Welcome extends HttpServlet {
             for (MessageEntity message : userMessages) {
                 messages.add(message.getSender());
                 messages.add(message.getText());
+                messages.add(message.getSenderEmail());
+                messages.add(message.getDate().toString());
             }
 
         } catch (HibernateException e) {

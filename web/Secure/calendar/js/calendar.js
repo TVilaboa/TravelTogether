@@ -953,12 +953,13 @@ if(!String.prototype.formatNum) {
 			ifrm = $(document.createElement("iframe"))
 				.attr({
 					width:       "100%",
+                    height: "100%",
 					frameborder: "0"
 				});
 		}
 
 
-		$('a[data-event-id]', this.context).on('click', function(event) {
+		$('a[data-event-id]').on('click', function(event) {
 			event.preventDefault();
 			event.stopPropagation();
 
@@ -979,8 +980,8 @@ if(!String.prototype.formatNum) {
 						var modal_body = $(this).find('.modal-body');
 						switch(self.options.modal_type) {
 							case "iframe" :
-								var height = modal_body.height() - parseInt(modal_body.css('padding-top'), 10) - parseInt(modal_body.css('padding-bottom'), 10);
-								$(this).find('iframe').height(Math.max(height, 50));
+								/*var height = modal_body.height() - parseInt(modal_body.css('padding-top'), 10) - parseInt(modal_body.css('padding-bottom'), 10);
+								$(this).find('iframe').height(Math.max(height, 50));*/
 								break;
 
 							case "ajax":

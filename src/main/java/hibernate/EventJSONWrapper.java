@@ -15,6 +15,8 @@ public class EventJSONWrapper {
     private String clazz;
     private Long start;
     private Long end;
+    private Float x;
+    private Float y;
 
     public EventJSONWrapper(EventsEntity event) {
         id = event.getId();
@@ -24,6 +26,8 @@ public class EventJSONWrapper {
         start = event.getStart();
         end = event.getEnd();
 
+        x = event.getY() != null ? event.getX() : 0;
+        y = event.getY() != null ? event.getY() : 0;
 
     }
 
@@ -74,4 +78,6 @@ public class EventJSONWrapper {
     public void setEnd(Long end) {
         this.end = end;
     }
+
+
 }

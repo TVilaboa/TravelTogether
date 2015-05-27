@@ -1,3 +1,4 @@
+<jsp:useBean id="userSession" scope="request" class="java.lang.String"/>
 <%--
   Created by IntelliJ IDEA.
   User: Toto
@@ -7,8 +8,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns="http://www.w3.org/1999/html">
+
+<link rel="stylesheet" href="/Secure/calendar/components/bootstrap3/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/css/calendar.css">
 <head>
-    <title>Open Graph Getting Started App - og.likes</title>
+    <title>Post Facebook</title>
     <style type="text/css">
         div {
             padding: 10px;
@@ -17,6 +21,20 @@
     <meta charset="UTF-8">
 </head>
 <body>
+<div class="container">
+<div class="jumbotron">
+    <h1>Post To Facebook</h1>
+
+    <p><%out.println("Logged as " + userSession + "\n");%></p>
+
+
+    <a class="btn btn-default" onclick="window.history.back()">Back</a>
+
+    <a class="btn btn-default" href="/Secure/calendar/calendar">Itinerary</a>
+    <a class="btn btn-default" href="../welcome">Inbox</a>
+
+
+</div>
 <script type="text/javascript" src="face.js">
 </script>
 
@@ -45,11 +63,11 @@
 <div>
     <input
             type="button"
-            value="Create a story with an og.likes action"
+            value="Post"
             onclick="create();">
 </div>
 
 <div id="result"></div>
-
+</div>
 </body>
 </html>

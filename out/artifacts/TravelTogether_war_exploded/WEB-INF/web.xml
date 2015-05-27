@@ -28,11 +28,11 @@
 
     <!-- make the session time-out after one minute -->
     <session-config>
-        <session-timeout>1</session-timeout>
+        <session-timeout>10</session-timeout>
     </session-config>
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 
     <servlet>
@@ -59,6 +59,14 @@
         <servlet-name>welcome</servlet-name>
         <servlet-class>servlets.Welcome</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>userService</servlet-name>
+        <servlet-class>servlets.UserService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>eventsService</servlet-name>
+        <servlet-class>servlets.EventsService</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -84,6 +92,14 @@
     <servlet-mapping>
         <servlet-name>welcome</servlet-name>
         <url-pattern>/Secure/welcome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userService</servlet-name>
+        <url-pattern>/Secure/users</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>eventsService</servlet-name>
+        <url-pattern>/Secure/calendar/events</url-pattern>
     </servlet-mapping>
 
 

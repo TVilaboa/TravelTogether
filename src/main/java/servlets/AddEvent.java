@@ -38,6 +38,12 @@ public class AddEvent extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doAll(req, resp);
+    }
+
+
+
+    private void doAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         UsersEntity dbuser = null;
         Session session = Main.getSession();
         Transaction tx = null;
@@ -60,7 +66,9 @@ public class AddEvent extends HttpServlet {
             e1.printStackTrace();
             JOptionPane.showMessageDialog(null, e1);
         }
-
+        String x=req.getParameter("X");
+        e.setX(Float.parseFloat(req.getParameter("X")));
+        e.setY(Float.parseFloat(req.getParameter("Y")));
         session = Main.getSession();
         try {
 

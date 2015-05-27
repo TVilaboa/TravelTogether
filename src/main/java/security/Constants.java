@@ -21,7 +21,7 @@ public interface Constants {
     public static final String HOME_FORM_ID = "homeForm";
     public static final String HOME_POST_FIELD = "postMe";
     public static final String SYSTEM_ADDRESS = "traveltogetheronline";
-    public static final String MAIL_PASS = "qweasdrtyfgh22";
-    public static final String WEB_ADDRESS = "http://localhost:8080";
+    public static final String MAIL_PASS = "qweasdrtyfgh33";
+    public static final String WEB_ADDRESS = "http://localhost:8081";
 }
 

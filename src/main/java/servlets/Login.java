@@ -24,7 +24,7 @@ public class Login extends HttpServlet {
 
         LoginRealm realm = new LoginRealm();
         if (realm.booleanAuthenticate(user, pass)) {
-            resp.sendRedirect(resp.encodeRedirectURL("/Secure/welcome"));
+            resp.sendRedirect(resp.encodeRedirectURL("/Secure/calendar/calendar"));
 
 
         } else

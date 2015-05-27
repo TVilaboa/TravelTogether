@@ -1,6 +1,7 @@
 package hibernate;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +18,30 @@ public class MessageEntity {
     private String text;
     private String sender;
     private UsersEntity user;
+    private String senderEmail;
+    private Date date;
 
+    @Basic
+    @Column(name = "SENDEREMAIL", nullable = true, insertable = true, updatable = false, length = 45)
+    public String getSenderEmail() {
+        String email = senderEmail == null ? "" : senderEmail;
+        return email;
+    }
+
+    public void setSenderEmail(String senderEmail) {
+        this.senderEmail = senderEmail;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "MESSAGE_DATE")
+    public Date getDate() {
+        Date dat = date == null ? new Date() : date;
+        return dat;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

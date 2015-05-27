@@ -9,6 +9,16 @@
     *zoom: 1;
 }
 
+.table-wrapper {
+    position: relative;
+}
+
+.table-scroll {
+    height: 150px;
+    overflow: auto;
+    margin-top: 20px;
+}
+
 .cal-row-fluid:before,
 .cal-row-fluid:after {
     display: table;
@@ -624,3 +634,13 @@ a.cal-event-week {
 .badge-important {
     background-color: #b94a48;
 }
+
+
+    .modal-lg
+    {
+        width:80%;
+        height: 98%; /* control height here */
+        margin-right: auto;
+        margin-left: auto;
+    }
+
